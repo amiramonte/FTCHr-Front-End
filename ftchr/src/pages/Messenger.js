@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/messenger.css";
 import Conversations from "../components/Conversation/Conversation";
 import Message from "../components/message/Message"
 import ChatOnline from "../components/chatOnline/ChatOnline";
+const router = require('express').Router();
 
 export default function Messenger() {
+    const [conversations, setConversations] = useState([])
+
+    // const {user} = useContext(AuthContext)
+    // need to grab the data of the current loggedIn user 
+
+    useEffect(() => {
+        const getConversations = async() => {
+            const res = await router.get('/conversations')
+        }
+    })
   return (
     <div className="messenger">
       <div className="chatMenu">
@@ -27,7 +38,7 @@ export default function Messenger() {
                 <Message own={true}/>
                 <Message own={true}/>
                 <Message own={true}/>
-                
+
             </div>
             <div className="chatBoxBottom">
                 <textarea placeholder="write something" className="chatMessageInput"></textarea>
