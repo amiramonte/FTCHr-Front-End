@@ -2,6 +2,8 @@ import React from "react";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
+import Login from "./pages/Login.js";
+import SignUp from "./pages/SignUp.js";
 
 
 function App() {
@@ -9,9 +11,7 @@ function App() {
     <div className="App">
       <h1 className=""></h1>
       <BrowserRouter>
-        <Header />
-          <Routes></Routes>
-        <Footer />
+        <SignUp />
       </BrowserRouter>
     </div>
   );
