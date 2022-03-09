@@ -1,17 +1,22 @@
 import React from "react";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
-import {Routes, Route, BrowserRouter} from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
-
+import Dashboard from "./pages/Dashboard.js";
 
 function App() {
   return (
     <div className="App">
       <h1 className=""></h1>
       <BrowserRouter>
-        <SignUp />
+        <Header />
+        <Routes>
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
+        </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

@@ -1,22 +1,25 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem;
 }
 
 .footer-text {
-    font-size: small;
-    text-align: center;
+  font-size: small;
+  text-align: center;
+}
+
+#map {
+  height: 300px;
 }
