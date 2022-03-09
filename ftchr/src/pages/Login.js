@@ -22,7 +22,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+      N0V0W3LS4LL0W3D, Inc
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -32,12 +32,13 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInSide() {
-  // update the user with this 
+function Login() {
+
   const {setUser} = useContext(UserContext);
   
   const email = useRef();
   const password = useRef();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     // email.current.value, password.current.value
@@ -109,10 +110,6 @@ export default function SignInSide() {
                 autoComplete="current-password"
                 ref={password}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
@@ -141,3 +138,5 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
+
+export default Login;
