@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useRef, useContext} from 'react';
+
+// access set Username
+import {UserContext} from '../components/context/UserContext'
 
 function Copyright(props) {
   return (
@@ -29,8 +33,17 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  // update the user with this 
+  const {setUser} = useContext(UserContext);
+  
+  const email = useRef();
+  const password = useRef();
   const handleSubmit = (event) => {
     event.preventDefault();
+    // email.current.value, password.current.value
+    // make an axios request to the database
+    
+
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
@@ -83,6 +96,7 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                ref={email}
               />
               <TextField
                 margin="normal"
@@ -93,6 +107,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                ref={password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
