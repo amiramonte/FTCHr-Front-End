@@ -20,7 +20,7 @@ import { createContext, useEffect, useState } from "react"
 export const UserContext = createContext({})
 
 export const UserContextProvider = ({children}) => {
-    const [user, setUser] = useState("");
+    const [user,, setUser] = useState("");
 
     // useEffect to grab the data of the user
     

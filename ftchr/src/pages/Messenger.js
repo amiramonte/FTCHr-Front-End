@@ -13,8 +13,9 @@ export default function Messenger() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [socket, setSocket] = useState(null);
+  const [arrivedMessage, setArrivedNewMessage] = useState(null);
   const scrollRef = useRef();
+  const socket = useRef();
 
   // const { user } = useContext(UserContext)
 
@@ -57,6 +58,14 @@ export default function Messenger() {
       text: newMessage, 
       conversationId: currentChat.id
     }
+    const members = [currentChat.senderId, currentChat.recieverId]
+    const recieverId = members.find(person => person !== user);
+
+    socket.current.emit("sendMessage", {
+      senderId: user, 
+      recieverId: recieverId,
+      text: newMessage
+    })
 
     try {
       const response = await axios.post("http://localhost:3001/api/messages", message)
@@ -67,13 +76,39 @@ export default function Messenger() {
     }
   }
 
+
   useEffect(()=> {
     scrollRef.current?.scrollIntoView({behavior: "smooth"})
   },[messages])
 
+  // to connnect to socketio server
   useEffect(() => {
-    setSocket(io("ws://localhost:8900"))
+// need to fix with user login later
+    const user = "truont2";
+    // socket.current.emit("addUser", user.id)
+    socket.current.emit("addUser", user)
+    socket.current.on("getUsers", users => {
+      console.log(users)
+    })
+
+  }, [user])
+
+  // connect to server just once when the page loads
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on('getMessage', (data) => {
+      setArrivedNewMessage({
+        data: senderId, 
+        text: data.text, 
+        createdAt: Date.now()
+      })
+    })
   },[])
+
+  useEffect(() => {
+    const members = [currentChat.senderId, currentChat.recieverId]
+    arrivedMessage && members.includes(arrivedMessage.sender) && setMessages(prev => [...prev, arrivedMessage])
+  }, [arrivedMessage, currentChat])
 
   return (
     <div className="messenger">

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Messenger from "./pages/Messenger.js";
-import Login from './pages/Login';
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
