@@ -8,7 +8,7 @@ import { createContext, useEffect, useState } from "react"
 //     return useContext(userContext)
 // 
 
-// grab user data from the jwt token after we verify and grab the user from the database
+// creation of the jwt token will update localstorage where u can grab the users data then put it into the userContext
 
 // const INITIAL_STATE = {
 //     user: null, 

@@ -1,8 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './chatOnline.css'
 import image from '../../images/naruto.jpg';
+import axios from 'axios';
 
-export default function ChatOnline() {
+export default function ChatOnline({onlineUsers, currentId, setCurrentChat}) {
+
+  const [friends, setFriends] = useState([]);
+  const [onlineFriends, setOnlineFriends] = useState([]);
+
+  useEffect(() => {
+    const getFriends = async() => {
+      const response = axios.get()
+    }
+  }, [])
+
   return (
     <div className='chatOnline'>
         <div className="chatOnlineFriend">

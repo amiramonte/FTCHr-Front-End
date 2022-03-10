@@ -8,16 +8,14 @@ export default function Conversations({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const friendId = members.find(person => person !== currentUser )
+    const friendId = members.find(person => person !== currentUser.user_name )
     // const friendId = members.find(person => person !== currentUser.id )
-    console.log(friendId);
+    console.log(friendId,"friend id who you are chatting with");
     // const friendId = "amiramonte"
     const getUser = async() => {
       try {
-        console.log("inside try block")
         const response = await axios('http://localhost:3001/api/user/getuser/' + friendId) 
         // const response = await axios.get('http://localhost:3001/api/user/getuser/amiramonte') 
-        console.log(response.data, "response")
         setUser(response.data);
       } catch(err) {
         console.log(err);
@@ -26,7 +24,7 @@ export default function Conversations({ conversation, currentUser }) {
     getUser();
   }, [currentUser, conversation])
 
-  console.log(user, "hello there")
+  console.log(currentUser, "current user ")
   return (
     <div className='conversation'>
       <img 

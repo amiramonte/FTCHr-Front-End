@@ -22,7 +22,7 @@ function App() {
             {/* <Route exact path="/" element={<Login />} /> */}
           </Routes>
         <Footer />
-        <SignUp />
+        {/* <SignUp /> */}
       </BrowserRouter>
     </div>
   );

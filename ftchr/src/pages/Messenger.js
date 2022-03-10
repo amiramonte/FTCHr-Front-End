@@ -5,6 +5,7 @@ import Message from "../components/message/Message";
 import ChatOnline from "../components/chatOnline/ChatOnline";
 import axios from "axios";
 import io from 'socket.io-client';
+import ComboBox from "../components/newConversationform.js/newConversation";
 
 import { UserContext } from "../components/context/UserContext";
 
@@ -13,28 +14,65 @@ export default function Messenger() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [arrivedMessage, setArrivedNewMessage] = useState(null);
+  const [arrivalMessage, setArrivalNewMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const scrollRef = useRef();
   const socket = useRef();
 
+  // only for testing
+  const [user, setUser] = useState({
+    user_name: "truont2",
+    user_email: "truont2@gmail.com",
+    user_password: "password2",
+  })
+
   // const { user } = useContext(UserContext)
 
+    // connect to server just once when the page loads
+    useEffect(() => {
+      socket.current = io("ws://localhost:8900");
+      socket.current.on('getMessage', (data) => {
+        console.log(data,"data");
+        setArrivalNewMessage({
+          sender: data.senderId, 
+          text: data.text, 
+          createdAt: Date.now()
+        })
+      })
+
+      // on page load, need to fetch all users, and set them as a state variable which is then passed into the combo box to render as options
+    },[])
+
+    useEffect(() => {
+      const members = [currentChat?.senderId, currentChat?.recieverId]
+      arrivalMessage && members.includes(arrivalMessage.sender) && setMessages((prev) => [...prev, arrivalMessage])
+    }, [arrivalMessage, currentChat]);
+
+    useEffect(() => {
+      // need to fix with user login later
+      console.log(user.user_name,"current logged in user")
+          socket.current.emit("addUser", user.user_name)
+          socket.current.on("getUsers", users => {
+            setOnlineUsers(users)
+          })
+      
+        }, [user])
+
   // need to grab the data of the current loggedIn user
-  const user = "truont2";
   useEffect(() => {
     const getConversations = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/conversations/" + user
+          "http://localhost:3001/api/conversations/" + user.user_name
         );
+        console.log(response,"conversation response")
         setConversations(response.data);
       } catch (err) {
-        console.log(err, "fetch err");
+        console.log(err);
       }
     };
-
     getConversations();
-  }, []);
+  }, [user.user_name]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -54,23 +92,22 @@ export default function Messenger() {
     e.preventDefault();
     const message = {
       // user rn but nneed to update to user,username later
-      senderId: user,
+      sender: user.user_name,
       text: newMessage, 
       conversationId: currentChat.id
     }
     const members = [currentChat.senderId, currentChat.recieverId]
-    const recieverId = members.find(person => person !== user);
+    const recieverId = members.find(person => person !== user.user_name);
 
     socket.current.emit("sendMessage", {
-      senderId: user, 
-      recieverId: recieverId,
-      text: newMessage
+      senderId: user.user_name, 
+      recieverId,
+      text: newMessage,
     })
 
     try {
       const response = await axios.post("http://localhost:3001/api/messages", message)
-      setMessages([...messages, response.data])
-      setNewMessage('');
+      setConversations([...conversations, response.data])
     } catch(err) {
       console.log(err)
     }
@@ -81,42 +118,30 @@ export default function Messenger() {
     scrollRef.current?.scrollIntoView({behavior: "smooth"})
   },[messages])
 
-  // to connnect to socketio server
-  useEffect(() => {
-// need to fix with user login later
-    const user = "truont2";
-    // socket.current.emit("addUser", user.id)
-    socket.current.emit("addUser", user)
-    socket.current.on("getUsers", users => {
-      console.log(users)
-    })
+  const createConversation = async (currentUser, recieverId) => {
+    const convo = {
+      senderId: currentUser, 
+      recieverId
+    }
 
-  }, [user])
-
-  // connect to server just once when the page loads
-  useEffect(() => {
-    socket.current = io("ws://localhost:8900");
-    socket.current.on('getMessage', (data) => {
-      setArrivedNewMessage({
-        data: senderId, 
-        text: data.text, 
-        createdAt: Date.now()
-      })
-    })
-  },[])
-
-  useEffect(() => {
-    const members = [currentChat.senderId, currentChat.recieverId]
-    arrivedMessage && members.includes(arrivedMessage.sender) && setMessages(prev => [...prev, arrivedMessage])
-  }, [arrivedMessage, currentChat])
+    try {
+      // just need to add to conversation and re render the page?
+      const response = await axios.post("http://localhost:3001/api/conversations", convo)
+      setMessages([...messages, response.data])
+    } catch(err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div className="messenger">
       <div className="chatMenu">
         <div className="chatMenuWrapper">
           <input placeholder="Search for Friends" className="chatMenuInput" />
+          <ComboBox />
+          <button onClick={createConversation}> Create a new conversation</button>
           {conversations.map((convo) => {
-            console.log(convo);
+            // console.log(convo);
             // need to  pass in user prop later
             return (
               <div
@@ -140,9 +165,10 @@ export default function Messenger() {
             <>
               <div className="chatBoxTop">
                 {messages.map((message) => {
+                  console.log(message, "user messages")
                   return (
-                  <div red={scrollRef}> 
-                    <Message message={message} own={message.sender === user}/>
+                  <div ref={scrollRef}> 
+                    <Message message={message} own={message.sender === user.user_name}/>
                   </div>
                   )
                 })}
@@ -166,7 +192,7 @@ export default function Messenger() {
       </div>
       <div className="chatOnline">
         <div className="chatOnlineWrapper">
-          <ChatOnline />
+          <ChatOnline onlineUsers={onlineUsers} currentId={user.user_name} setCurrentChat={setCurrentChat}/>
         </div>
       </div>
     </div>
