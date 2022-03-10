@@ -5,7 +5,7 @@ import "../styles/style.css";
 
 export default function Dashboard() {
   return (
-    <div className="dashboard-flex">
+    <div className="dashboard-flex flex-row">
       <div className="postcards">
         <Postcard />
         <Postcard />
