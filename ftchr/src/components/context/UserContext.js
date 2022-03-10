@@ -17,13 +17,15 @@ const INITIAL_STATE = {
 
 
 // create context
-const [user, setUser] = useState("")
-export const UserContext = createContext({user, setUser,
-    login: (user_name) => {
-        setUser(user_name)
-        console.log(user);
-    }
-})
+// const [user, setUser] = useState("")
+// export const UserContext = createContext({user, setUser,
+//     login: (user_name) => {
+//         setUser(user_name)
+//         console.log(user);
+//     }
+// })
+
+export const UserContext = createContext({})
 
 export const UserContextProvider = ({children}) => {
     const [user, setUser] = useState("");

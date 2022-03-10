@@ -21,10 +21,10 @@ function App() {
           <Header />
             <Routes>
               <Route exact path="/" element={<Messenger />} />
-              {/* <Route exact path="/" element={<Login />} /> */}
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/signup" element={<SignUp /> } />
             </Routes>
           <Footer />
-          {/* <SignUp /> */}
         </BrowserRouter>
       </div>
     </userContext>
