@@ -2,7 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-// import CardMedia from "@mui/material/CardMedia";
+import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -58,12 +59,12 @@ export default function Postcard() {
           title="Hangout at Discovery Park! 2PM!"
           subheader="March 9th, 2022"
         />
-        {/* <CardMedia
-        component="img"
-        height="194"
-        image="../public/golden-retriever-dog.jpg"
-        alt="Paella dish"
-      /> */}
+        <CardMedia
+          component="img"
+          height="194"
+          src="../assets/images/golden-retriever-dog.jpg"
+          alt="User upload"
+        />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             Looking to hang out with another dog today at the park! My dog gets
@@ -86,6 +87,8 @@ export default function Postcard() {
               component="form"
               sx={{
                 "& .MuiTextField-root": { m: 1, width: "25ch" },
+                display: "flex",
+                flexDirection: "row",
               }}
               noValidate
               autoComplete="off"
@@ -100,6 +103,9 @@ export default function Postcard() {
                   onChange={handleChange}
                 />
               </div>
+              <Button variant="outlined" size="small" fullWidth={false}>
+                Submit
+              </Button>
             </Box>
             <Typography paragraph>Comments:</Typography>
             <Typography paragraph>Cute Dog!</Typography>
