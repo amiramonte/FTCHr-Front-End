@@ -16,6 +16,7 @@ export default function Messenger() {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalNewMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [allUsers, setAllUsers] =useState([]);
   const scrollRef = useRef();
   const socket = useRef();
 
@@ -41,6 +42,17 @@ export default function Messenger() {
       })
 
       // on page load, need to fetch all users, and set them as a state variable which is then passed into the combo box to render as options
+      const getUsers = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:3001/api/users");
+          console.log(response,"conversation response")
+          setAllUsers(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      getUsers(); 
     },[])
 
     useEffect(() => {

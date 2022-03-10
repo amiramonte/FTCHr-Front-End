@@ -14,6 +14,7 @@ export default function ComboBox() {
   );
 }
 
+
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
   { label: 'The Shawshank Redemption', year: 1994 },
