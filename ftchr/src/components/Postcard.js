@@ -35,7 +35,7 @@ export default function Postcard() {
     setExpanded(!expanded);
   };
 
-  const [value, setValue] = React.useState("Controlled");
+  const [value, setValue] = React.useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -43,7 +43,7 @@ export default function Postcard() {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 450 }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -71,12 +71,6 @@ export default function Postcard() {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -99,7 +93,7 @@ export default function Postcard() {
               <div>
                 <TextField
                   id="outlined-multiline-flexible"
-                  label="Multiline"
+                  label="Leave Comment"
                   multiline
                   maxRows={4}
                   value={value}
