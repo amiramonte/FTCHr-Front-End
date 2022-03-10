@@ -5,11 +5,15 @@ const io = require("socket.io")(8900, {
 });
 
 // how to send to the same user every time
+// this only inlcudes users that are online currently
 let users = [];
 
-const addUser = (user, socketId) => {
-    !users.some((userobj) => userobj.user === user) &&
-        users.push({user, socketId});
+// may possibly need to create an array of alllk users that are on the app to allow conversations that are not real time
+// fetch conversation members? 
+// socketio used for real time updating, so if you are not online,th emessage is sent through the database still?
+const addUser = (user_name, socketId) => {
+    !users.some((userobj) => userobj.user_name === user_name) &&
+        users.push({user_name, socketId});
 };
 
 const removeUser = (socketId) => {
@@ -18,27 +22,31 @@ const removeUser = (socketId) => {
     })
 };
 
-const getUser = (user) => {
-    return users.find(userobj => userobj.user === user)
+const getUser = (user_name) => {
+    // return users.find((userobj) => userobj.user_name === user_name)
+    return user_name;
 }
 
 io.on("connection", (socket) => {
     // when connect
-    
     console.log("a user connected");
     // take userId and socketId from user
-    socket.on("addUser", user => {
-        addUser(user, socket.id)
+    socket.on("addUser", (user_name) => {
+        addUser(user_name, socket.id)
+        // get all users to find online friends
         io.emit("getUsers", users)
     } )
 
     // send and get a message 
-    socket.on("sendMessage", ({senderId, reciever, text}) => {
-        const user = getUser(reciever);
-        io.to(user.socketId).emit("getMessage", {
-            senderId, 
-            text
-        });
+    // const members = [currentChat.senderId, currentChat.recieverId]
+    socket.on("sendMessage", ({senderId, recieverId, text}) => {
+        // const user is the person who is recieving the message
+        const user = getUser(recieverId);
+        console.log(user, "user that we are trying to send the id of")
+        // io.to(user.socketId).emit("getMessage", {
+        //     senderId, 
+        //     text
+        // });
     })
 
     socket.on("disconnect", () => {
