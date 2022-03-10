@@ -14,7 +14,7 @@ export default function Dashboard() {
   },[])
 
   return (
-    <div className="dashboard-flex">
+    <div className="dashboard-flex flex-row">
       <div className="postcards">
         {posts.map(post=><Postcard key={post.id} UserId={userData} post_title={post.title} post_content={post.content} />)}
       </div>

@@ -30,9 +30,13 @@
   height: 50vh;
 }
 
-.dashboard-flex {
+.flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.justifycontent-center {
+  justify-content: center;
 }
 
 .postcards {
