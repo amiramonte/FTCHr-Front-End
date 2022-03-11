@@ -32,6 +32,12 @@ const ExpandMore = styled((props) => {
 export default function Postcard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
+  const [comments, setComments] = React.useState([]);
+
+  React.useEffect(() => {
+    setComments(props.comments);
+  }, []);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -107,11 +113,11 @@ export default function Postcard(props) {
               </Button>
             </Box>
             <Typography paragraph>Comments:</Typography>
-            <Typography paragraph>{props.comments}</Typography>
-            <Typography paragraph>
-              What a handsome Pup! See you there!
-            </Typography>
-            <Typography paragraph>Woof!</Typography>
+            {comments.map((comment) => (
+              <Typography paragraph>{comment}</Typography>
+            ))}
+            {/* <Typography paragraph>{props.comments}</Typography> */}
+            {console.log(props.comments)}
           </CardContent>
         </Collapse>
       </Card>
