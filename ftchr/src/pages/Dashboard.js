@@ -24,8 +24,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard-flex flex-row">
       <div className="postcards">
-        {posts.map(posts=><Postcard key={posts.id} username={posts.User.user_name} UserId={posts.UserId} title={posts.post_title} content={posts.post_content} />)}
-        {comments.map(comments=><Postcard key={comments.id} comment={comments.comment_body} />)}
+        {posts.map(posts=><Postcard key={posts.id} username={posts.User.user_name} UserId={posts.UserId} title={posts.post_title} content={posts.post_content} comments={posts.Comments.map(Comments=>Comments.comment_body)} />)}
       </div>
       <div>
         <Map />
