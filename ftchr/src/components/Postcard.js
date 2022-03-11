@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Postcard() {
+export default function Postcard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -56,7 +56,7 @@ export default function Postcard() {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Hangout at Discovery Park! 2PM!"
+          title={props.title}
           subheader="March 9th, 2022"
         />
         <CardMedia
