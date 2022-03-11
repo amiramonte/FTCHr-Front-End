@@ -12,35 +12,35 @@ import { useEffect, useState } from "react";
 
 function PetSection() {
   // const [pets, setPets] = useState([]);
-  const [user, setUser] = useState({
-    user_id: 0,
-    user_name: "",
-  });
-  const [token, setToken] = useState("");
-  useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    fetch("http://localhost:3001/api/user/verifieduser", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${savedToken}`,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        if (data.id) {
-          console.log(data, "data from the verified route");
-          setToken(savedToken);
-          setUser({
-            user_id: data.id,
-            user_name: data.user_name,
-          });
-        }
-      });
-  }, []);
+  // const [user, setUser] = useState({
+  //   user_id: 0,
+  //   user_name: "",
+  // });
+  // const [token, setToken] = useState("");
+  // useEffect(() => {
+  //   const savedToken = localStorage.getItem("token");
+  //   fetch("http://localhost:3001/api/user/verifieduser", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       authorization: `Bearer ${savedToken}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (data.id) {
+  //         console.log(data, "data from the verified route");
+  //         setToken(savedToken);
+  //         setUser({
+  //           user_id: data.id,
+  //           user_name: data.user_name,
+  //         });
+  //       }
+  //     });
+  // }, []);
 
   return (
     <ImageList sx={{ width: 500, height: 450 }}>
