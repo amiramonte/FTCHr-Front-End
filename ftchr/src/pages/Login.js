@@ -58,6 +58,8 @@ function Login() {
       //   user_email:data.user.email,
       //   user_password:data.user.password
       // })
+
+      window.location.href = "/dashboard";
     })
   };
 
