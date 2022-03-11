@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Postcard() {
+export default function Postcard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -56,8 +56,8 @@ export default function Postcard() {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Hangout at Discovery Park! 2PM!"
-          subheader="March 9th, 2022"
+          title={props.title}
+          subheader={props.username}
         />
         <CardMedia
           component="img"
@@ -67,8 +67,7 @@ export default function Postcard() {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            Looking to hang out with another dog today at the park! My dog gets
-            along with all dogs, I'll be at Discovery Park around 2PM!
+            {props.content}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -108,7 +107,7 @@ export default function Postcard() {
               </Button>
             </Box>
             <Typography paragraph>Comments:</Typography>
-            <Typography paragraph>Cute Dog!</Typography>
+            <Typography paragraph>{props.comments}</Typography>
             <Typography paragraph>
               What a handsome Pup! See you there!
             </Typography>
