@@ -13,10 +13,19 @@ export default function Dashboard() {
     })
   },[])
 
+  const [comments, setComments] = useState([])
+  useEffect(()=>{
+    fetch("http://localhost:3001/api/comment/getallcomments").then(res=>res.json()).then(data=>{
+      console.log(data);
+      setComments(data);
+    })
+  },[])
+
   return (
     <div className="dashboard-flex flex-row">
       <div className="postcards">
-        {posts.map(post=><Postcard key={posts.id} UserId={posts.UserId} title={posts.post_title} content={posts.posts_content} />)}
+        {posts.map(posts=><Postcard key={posts.id} username={posts.User.user_name} UserId={posts.UserId} title={posts.post_title} content={posts.post_content} />)}
+        {comments.map(comments=><Postcard key={comments.id} comment={comments.comment_body} />)}
       </div>
       <div>
         <Map />
