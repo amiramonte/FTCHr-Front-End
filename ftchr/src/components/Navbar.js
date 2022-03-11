@@ -101,6 +101,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
 
 const pages = ["Dashboard", "Messenger"];
 const settings = ["Profile", "Logout"];
@@ -113,10 +114,6 @@ const menuItems = [
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const logout = () => {
-    console.log("logout")
-  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -132,6 +129,17 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const logout =(e) =>{
+    localStorage.removeItem("token");
+    // setToken("");
+    // setUserData({
+    //   email:"",
+    //   id:0,
+    //   Blogs:[]
+    // })
+    window.location.href = '/login'
+  }
 
   return (
     <AppBar position="static">

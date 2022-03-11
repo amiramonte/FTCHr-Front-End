@@ -13,32 +13,46 @@ import Profile from "./pages/Profile.js";
 import axios from "axios";
 
 function App() {
-  const [user, setUser] = useState({})
-  useEffect(() => {
-    // /verifieduser
-    const getCurrentUser = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3001/api/user/verifieduser"
-        );
-        console.log(response, "user data response");
-        setUser(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getCurrentUser();
-  }, []);
+  const [token, setToken] = useState("")
+  const [user, setUser] = useState(
+    {
+      user_id: 0, 
+      user_name: ""
+    })
+      // grab user data from token 
+      useEffect(() => {
+        const savedToken = localStorage.getItem("token");
+        fetch("http://localhost:3001/api/user/verifieduser",{
+          method:"GET",
+          headers:{
+              "Content-Type":"application/json",
+              "authorization":`Bearer ${savedToken}`
+          }
+      }).then(res=>{
+          return res.json();
+      }).then(data=>{
+        if(data.id){
+          console.log(data, "data from the verified route")
+          setToken(savedToken);
+          setUser({
+            user_id:data.id,
+            user_name:data.user_name,
+          })
+        }
+      })
+      },[])
+
   return (
     <div className="App">
       <h1 className=""></h1>
       <BrowserRouter>
-        <Header />
+        {user.user_name !== "" ? (<Header />) : <div></div>}
         <Routes>
-          <Route exact path="/messenger" element={<Messenger />} />
+          <Route exact path="/messenger" element={<Messenger user={user}/>} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>

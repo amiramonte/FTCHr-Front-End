@@ -12,7 +12,7 @@ export default function ChatOnline({onlineUsers, currentId, setCurrentChat}) {
     const getFriends = async() => {
       const response = axios.get()
     }
-  }, [])
+  }, [currentId])
 
   return (
     <div className='chatOnline'>
