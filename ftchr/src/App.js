@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Messenger from "./pages/Messenger.js";
@@ -10,9 +10,25 @@ import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Dashboard from "./pages/Dashboard.js";
 import Profile from "./pages/Profile.js";
+import axios from "axios";
 
 function App() {
-  const[user, setUser] = useState("");
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    // /verifieduser
+    const getCurrentUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/api/user/verifieduser"
+        );
+        console.log(response, "user data response");
+        setUser(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getCurrentUser();
+  }, []);
   return (
     <div className="App">
       <h1 className=""></h1>
