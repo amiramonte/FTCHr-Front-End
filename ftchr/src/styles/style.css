@@ -44,10 +44,14 @@
 
 .postcards {
   width: 30vw;
+  
+  
+}
+
+.postContent {
   height: 80vh;
   overflow-y: scroll;
 }
-
 
 @media screen and (max-width: 765px) {
 
