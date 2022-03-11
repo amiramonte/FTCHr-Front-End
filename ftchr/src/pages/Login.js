@@ -12,10 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useRef, useContext} from 'react';
+import {useRef, useState} from 'react';
 
-// access set Username
-import {UserContext} from '../components/context/UserContext'
 
 function Copyright(props) {
   return (
@@ -33,24 +31,36 @@ function Copyright(props) {
 const theme = createTheme();
 
 function Login() {
-
-  const {setUser} = useContext(UserContext);
+  const [formState, setFormState] = useState({
+    user_email:'',
+    user_password:''
+  })
+  const [token, setToken] = useState("")
   
   const email = useRef();
   const password = useRef();
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    // email.current.value, password.current.value
-    // make an axios request to the database
-    
+    console.log(formState);
+    fetch("http://localhost:3001/api/user/sign-in",{
+        method:"POST",
+        body:JSON.stringify(formState),
+        headers:{
+            "Content-Type":"application/json"
+        }
+    }).then(res=>res.json()).then(data=>{
+      console.log(data.userToken,"login data")
+      setToken(data.userToken);
+      localStorage.setItem("token",data.userToken);
+      // setUserData({
+      //   user_name:data.user.id,
+      //   user_email:data.user.email,
+      //   user_password:data.user.password
+      // })
 
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+      window.location.href = "/dashboard";
+    })
   };
 
   return (
@@ -98,6 +108,8 @@ function Login() {
                 autoComplete="email"
                 autoFocus
                 ref={email}
+                value={formState.user_email}
+                onChange={e=>setFormState({...formState,user_email:e.target.value})}
               />
               <TextField
                 margin="normal"
@@ -109,6 +121,8 @@ function Login() {
                 id="password"
                 autoComplete="current-password"
                 ref={password}
+                value={formState.user_password}
+                onChange={e=>setFormState({...formState,user_password:e.target.value})}
               />
               <Button
                 type="submit"
@@ -120,12 +134,12 @@ function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="https://www.youtube.com/watch?v=72JYhSoVYPc" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

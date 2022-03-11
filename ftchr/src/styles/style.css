@@ -30,6 +30,9 @@
   height: 50vh;
 }
 
+/*  m765px*/
+
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -41,4 +44,19 @@
 
 .postcards {
   width: 30vw;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+
+@media screen and (max-width: 765px) {
+
+  .postcards {
+    width: 100vw;
+  }
+
+  #map {
+    display: none;
+  }
+  
 }

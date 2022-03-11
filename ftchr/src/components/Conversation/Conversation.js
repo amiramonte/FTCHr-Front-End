@@ -30,7 +30,7 @@ export default function Conversations({ conversation, currentUser }) {
       <img 
         className='conversationImg' 
         // src={user?.user_photo ? user.user_photo : image} 
-        src={image}
+        src={user?.user_photo ? user.user_photo : image}
         alt="something" />
       {/* <span className='conversationName'>{`${conversation.senderId}, ${conversation.recieverId} `}</span> */}
       <span className='conversationName'>{user?.user_name}</span>
