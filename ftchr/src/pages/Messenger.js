@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/messenger.css";
 import Conversations from "../components/Conversation/Conversation";
 import Message from "../components/message/Message";
@@ -7,11 +7,10 @@ import axios from "axios";
 import io from "socket.io-client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
 
-import { UserContext } from "../components/context/UserContext";
-
-export default function Messenger() {
+export default function Messenger({ user }) {
+  const [token, setToken] = useState("");
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -19,32 +18,30 @@ export default function Messenger() {
   const [arrivalMessage, setArrivalNewMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-// for the autocomplete form to create a new conversation
+
+  // for the autocomplete form to create a new conversation
   const [value, setValue] = React.useState(allUsers[0]);
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState("");
   const scrollRef = useRef();
   const socket = useRef();
 
-  // only for testing
-  // const [user, setUser] = useState({
-  //   user_name: "truont2",
-  //   user_email: "truont2@gmail.com",
-  //   user_password: "password2",
-  // })
-
-  const [user, setUser] = useState({});
-
-  // connect to server just once when the page loads
+  // connect to the socket server
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
-    socket.current.on("getMessage", (data) => {
-      console.log(data, "data");
-      setArrivalNewMessage({
-        sender: data.senderId,
-        text: data.text,
-        createdAt: Date.now(),
-      });
-    });
+    socket.current.on(
+      "getMessage",
+      (data) => {
+        console.log(data, "data");
+        setArrivalNewMessage({
+          sender: data.senderId,
+          text: data.text,
+          createdAt: Date.now(),
+        });
+      },
+      []
+    );
+
+    // get current logged in user through the toke
 
     // on page load, need to fetch all users, and set them as a state variable which is then passed into the combo box to render as options
     const getAllUsers = async () => {
@@ -53,32 +50,14 @@ export default function Messenger() {
         const response = await axios.get(
           "http://localhost:3001/api/user/getallusers"
         );
-        console.log(response, "conversation response");
         const userArr = response.data.map((userobj) => userobj.user_name);
         console.log(userArr, "user array ");
         setAllUsers(userArr);
-
-        // hit route to take token and get user data from dtabase
-        // setUser the info retrieved from the database
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    // /verifieduser
-    const getCurrentUser = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3001/api/user/verifieduser"
-        );
-        console.log(response, "user data response");
-        setUser(response.data);
       } catch (err) {
         console.log(err);
       }
     };
     getAllUsers();
-    getCurrentUser();
   }, []);
 
   useEffect(() => {
@@ -89,12 +68,14 @@ export default function Messenger() {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    // need to fix with user login later
     console.log(user.user_name, "current logged in user");
-    socket.current.emit("addUser", user.user_name);
-    socket.current.on("getUsers", (users) => {
-      setOnlineUsers(users);
-    });
+    if (user.user_name !== "") {
+      socket.current.emit("addUser", user.user_name);
+      socket.current.on("getUsers", (users) => {
+        setOnlineUsers(users);
+        console.log(users, "connected users");
+      });
+    }
   }, [user]);
 
   // need to grab the data of the current loggedIn user
@@ -104,7 +85,6 @@ export default function Messenger() {
         const response = await axios.get(
           "http://localhost:3001/api/conversations/" + user.user_name
         );
-        console.log(response, "conversation response");
         setConversations(response.data);
       } catch (err) {
         console.log(err);
@@ -127,10 +107,10 @@ export default function Messenger() {
     getMessages();
   }, [currentChat]);
 
+  // function runs when the send message is pressed
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      // user rn but nneed to update to user,username later
       sender: user.user_name,
       text: newMessage,
       conversationId: currentChat.id,
@@ -149,37 +129,38 @@ export default function Messenger() {
         "http://localhost:3001/api/messages",
         message
       );
-      setConversations([...conversations, response.data]);
+      setMessages([...messages, response.data]);
+      setNewMessage("");
     } catch (err) {
       console.log(err);
     }
   };
 
+  // makes the page scroll to the newest message
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // function to create a new conversation
   const createConversation = async () => {
     const convo = {
-      // senderId: user.user_name,
-      senderId: "truont2",
+      senderId: user.user_name,
       recieverId: value,
     };
 
     try {
-      console.log(convo, "conversation")
+      console.log(convo, "conversation");
       // just need to add to conversation and re render the page?
       const response = await axios.post(
         "http://localhost:3001/api/conversations",
         convo
       );
-      console.log("conversation created")
+      console.log(response.data.recieverId, "conversation created");
       setConversations([...conversations, response.data]);
     } catch (err) {
       console.log(err);
     }
   };
-
 
   return (
     <div className="messenger">
@@ -199,10 +180,16 @@ export default function Messenger() {
             options={allUsers}
             sx={{ width: 300 }}
             renderInput={(params) => (
-              <TextField {...params} label="Select a User to chat with" />
+              <TextField required {...params} label="Select a User to chat with" />
             )}
           />
-          <Button variant="contained" style= {{ margin: "5px 0px"}} onClick={createConversation}>Create Conversation</Button>
+          <Button
+            variant="contained"
+            style={{ margin: "5px 0px" }}
+            onClick={createConversation}
+          >
+            Create Conversation
+          </Button>
           {conversations.map((convo) => {
             // console.log(convo);
             // need to  pass in user prop later
@@ -253,6 +240,7 @@ export default function Messenger() {
             </>
           ) : (
             <span className="noConversationText">
+              Hello, {user.user_name}
               Open a conversation to start a chat.
             </span>
           )}
