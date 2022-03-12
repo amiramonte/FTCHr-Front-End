@@ -58,22 +58,22 @@ export default function Dashboard() {
         setComments(data);
       });
   }, []);
-
+  console.log(posts, "publoc posts")
   return (
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
             <div className="postcards w-100">
-              <PostModal />
+              <PostModal setPosts={setPosts}/>
               <div className="postContent">
-              {posts.map((posts) => (
+              {posts.map((post) => (
                 <Postcard
-                  key={posts.id}
-                  username={posts.User.user_name}
-                  UserId={posts.UserId}
-                  title={posts.post_title}
-                  content={posts.post_content}
-                  comments={posts.Comments.map(
+                  key={post.id}
+                  username={post.User.user_name}
+                  UserId={post.UserId}
+                  title={post.post_title}
+                  content={post.post_content}
+                  comments={post.Comments.map(
                     (Comments) => Comments.comment_body
                   )}
                 />
