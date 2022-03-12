@@ -5,17 +5,26 @@ import "../styles/style.css";
 import { useEffect, useState } from "react";
 import Login from "./Login";
 import PostModal from '../components/PostModal'
+import moment from 'moment'
 
 export default function Dashboard() {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
   //front end fetch request to collect all of the posts
+
+  var timer = setInterval(function() {
+    let currentTime = parseInt(moment().format("HH"));
+    if(currentTime === 0) {
+        setPosts([]);
+    }
+}, 600000)
+
   useEffect(() => {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setPosts(data);
+        setPosts(data.reverse());
       });
   }, []);
   const [user, setUser] = useState({
@@ -50,15 +59,15 @@ export default function Dashboard() {
       });
   }, []);
 
-  const [comments, setComments] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:3001/api/comment/getallcomments")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setComments(data);
-      });
-  }, []);
+  // const [comments, setComments] = useState([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:3001/api/comment/getallcomments")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setComments(data);
+  //     });
+  // }, []);
   console.log(posts, "publoc posts")
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
@@ -66,6 +75,8 @@ export default function Dashboard() {
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
+            <PostModal setPosts={setPosts}/>
+            <div className="postContent">
             {posts.map((post) => (
               <Postcard
                 key={post.id}
@@ -78,6 +89,7 @@ export default function Dashboard() {
                 )}
               />
             ))}
+            </div>
           </div>
           <div>
             <Map />

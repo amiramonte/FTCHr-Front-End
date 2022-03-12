@@ -28,7 +28,13 @@ export default function FormPropsTextFields({ setPosts }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "created post data");
-        setPosts(prevTodos => [...prevTodos, data]);
+        // setPosts(prevTodos => [...prevTodos, data]);
+        fetch("http://localhost:3001/api/post/getallposts")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setPosts(data.reverse());
+          });
       });
   };
   return (
