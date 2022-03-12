@@ -7,7 +7,9 @@ import Login from "./Login";
 import PostModal from '../components/PostModal'
 
 export default function Dashboard() {
+  //Creating a use state for posts
   const [posts, setPosts] = useState([]);
+  //front end fetch request to collect all of the posts
   useEffect(() => {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())
@@ -16,7 +18,6 @@ export default function Dashboard() {
         setPosts(data);
       });
   }, []);
-
   const [user, setUser] = useState({
     user_id: 0,
     user_name: "",
@@ -59,27 +60,25 @@ export default function Dashboard() {
       });
   }, []);
   console.log(posts, "publoc posts")
+  //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
-            <div className="postcards w-100">
-              <PostModal setPosts={setPosts}/>
-              <div className="postContent">
-              {posts.map((post) => (
-                <Postcard
-                  key={post.id}
-                  username={post.User.user_name}
-                  UserId={post.UserId}
-                  title={post.post_title}
-                  content={post.post_content}
-                  comments={post.Comments.map(
-                    (Comments) => Comments.comment_body
-                  )}
-                />
-              ))}
-              </div>
-            </div>
+          <div className="postcards">
+            {posts.map((post) => (
+              <Postcard
+                key={post.id}
+                username={post.User.user_name}
+                UserId={post.UserId}
+                title={post.post_title}
+                content={post.post_content}
+                comments={post.Comments.map(
+                  (Comments) => Comments.comment_body
+                )}
+              />
+            ))}
+          </div>
           <div>
             <Map />
           </div>
