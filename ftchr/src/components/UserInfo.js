@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { spacing } from "@mui/system";
 
-function UserInfo() {
+function UserInfo(props) {
   return (
     <div className="flex-row justifycontent-center">
       <div className="user-photo">
@@ -19,10 +19,10 @@ function UserInfo() {
         <Card sx={{ minWidth: 100, maxWidth: 400 }}>
           <CardContent>
             <Typography variant="h5" component="div">
-              Username
+              {props.username}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Just me and my two dogs, Gus and Douglas!
+              Just me and my dogs!
             </Typography>
             <Typography variant="body2">
               Gus is an American Pitbull Terrier and Douglas is a goofy lab mix
