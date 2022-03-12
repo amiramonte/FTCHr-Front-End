@@ -32,12 +32,10 @@ function Profile() {
         if (data.id) {
           // console.log(data, "data from the verified route");
           setToken(savedToken);
-          //   // setPets(data);
-          //   // console.log(pets);
-          // setUser({
-          //   user_id: data.id,
-          //   user_name: data.user_name,
-          // });
+          setUser({
+            user_id: data.id,
+            user_name: data.user_name,
+          });
         }
       });
   }, []);
@@ -45,7 +43,7 @@ function Profile() {
   return (
     <div className="">
       <div className="user-info">
-        <UserInfo />
+        <UserInfo username={user.user_name} />
       </div>
       <div className="flex-row justifycontent-center">
         {pets.map((pets) => (
