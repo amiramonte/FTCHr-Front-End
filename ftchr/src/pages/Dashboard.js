@@ -12,13 +12,6 @@ export default function Dashboard() {
   const [posts, setPosts] = useState([]);
   //front end fetch request to collect all of the posts
 
-  var timer = setInterval(function() {
-    let currentTime = parseInt(moment().format("HH"));
-    if(currentTime === 0) {
-        setPosts([]);
-    }
-}, 600000)
-
   useEffect(() => {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())

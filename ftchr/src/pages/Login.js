@@ -30,7 +30,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function Login() {
+function Login({setLoggedIn}) {
   const [formState, setFormState] = useState({
     user_email:'',
     user_password:''
@@ -58,6 +58,7 @@ function Login() {
       //   user_email:data.user.email,
       //   user_password:data.user.password
       // })
+      setLoggedIn(true);
 
       window.location.href = "/dashboard";
     })
