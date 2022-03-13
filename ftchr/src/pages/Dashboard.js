@@ -13,7 +13,7 @@ export default function Dashboard() {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data, "post data");
         setPosts(data);
       });
   }, []);
@@ -63,9 +63,7 @@ export default function Dashboard() {
                 UserId={posts.UserId}
                 title={posts.post_title}
                 content={posts.post_content}
-                comments={posts.Comments.map(
-                  (Comments) => Comments.comment_body
-                )}
+                comments={posts.Comments.map((Comment) => Comment)}
               />
             ))}
           </div>
