@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import NewPostButton from "./NewPostButton";
 import { useState, useEffect } from "react";
+import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
 
 export default function FormPropsTextFields({ setPosts }) {
   const [token, setToken] = useState("");
@@ -68,6 +69,7 @@ export default function FormPropsTextFields({ setPosts }) {
           }
         />
       </div>
+      <CloudinaryUploadWidget />
       <button onClick={createPost}>Create Post</button>
     </Box>
   );

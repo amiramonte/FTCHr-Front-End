@@ -4,8 +4,9 @@ import Map from "../components/Map";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
 import Login from "./Login";
-import PostModal from '../components/PostModal'
-import moment from 'moment'
+import PostModal from "../components/PostModal";
+import moment from "moment";
+import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
 
 export default function Dashboard() {
   //Creating a use state for posts
@@ -61,25 +62,26 @@ export default function Dashboard() {
   //       setComments(data);
   //     });
   // }, []);
-  console.log(posts, "publicc posts")
+  console.log(posts, "publicc posts");
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
-            <PostModal setPosts={setPosts}/>
+            <CloudinaryUploadWidget />
+            <PostModal setPosts={setPosts} />
             <div className="postContent">
-            {posts.map((post) => (
-              <Postcard
-                key={post.id}
-                username={post.User.user_name}
-                UserId={post.UserId}
-                title={post.post_title}
-                content={post.post_content}
-                comments={post.Comments.map((Comment) => Comment)}
-              />
-            ))}
+              {posts.map((post) => (
+                <Postcard
+                  key={post.id}
+                  username={post.User.user_name}
+                  UserId={post.UserId}
+                  title={post.post_title}
+                  content={post.post_content}
+                  comments={post.Comments.map((Comment) => Comment)}
+                />
+              ))}
             </div>
           </div>
           <div>
