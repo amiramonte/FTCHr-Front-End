@@ -114,10 +114,12 @@ export default function Postcard(props) {
             </Box>
             <Typography paragraph>Comments:</Typography>
             {comments.map((comment) => (
-              <Typography paragraph>{comment}</Typography>
+              <Typography paragraph>
+                <a href="#">{comment.User.user_name}</a>
+                <span>: {comment.comment_body}</span>
+              </Typography>
             ))}
             {/* <Typography paragraph>{props.comments}</Typography> */}
-            {console.log(props.comments)}
           </CardContent>
         </Collapse>
       </Card>
