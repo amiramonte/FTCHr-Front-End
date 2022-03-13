@@ -61,7 +61,7 @@ export default function Dashboard() {
   //       setComments(data);
   //     });
   // }, []);
-  console.log(posts, "publoc posts")
+  console.log(posts, "publicc posts")
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
@@ -72,12 +72,12 @@ export default function Dashboard() {
             <div className="postContent">
             {posts.map((post) => (
               <Postcard
-                key={posts.id}
-                username={posts.User.user_name}
-                UserId={posts.UserId}
-                title={posts.post_title}
-                content={posts.post_content}
-                comments={posts.Comments.map((Comment) => Comment)}
+                key={post.id}
+                username={post.User.user_name}
+                UserId={post.UserId}
+                title={post.post_title}
+                content={post.post_content}
+                comments={post.Comments.map((Comment) => Comment)}
               />
             ))}
             </div>
