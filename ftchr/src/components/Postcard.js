@@ -17,6 +17,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import image from '../images/naruto.jpg';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -68,7 +69,7 @@ export default function Postcard(props) {
         <CardMedia
           component="img"
           height="194"
-          src="../assets/images/golden-retriever-dog.jpg"
+          src={image ? image : "../assets/images/golden-retriever-dog.jpg"}
           alt="User upload"
         />
         <CardContent>

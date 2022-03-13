@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useState} from 'react'
 
 function Copyright(props) {
   return (
@@ -29,8 +30,15 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function SignUp() {
-  const handleSubmit = (event) => {
+function SignUp({setLoggedIn, setToken}) {
+  const [formState, setFormState] = useState({
+    user_firstName: '',
+    user_lastName: '',
+    user_email:'',
+    user_password:''
+  })
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
@@ -38,6 +46,21 @@ function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    fetch("http://localhost:3001/api/user/sign-up",{
+        method:"POST",
+        body:JSON.stringify(formState),
+        headers:{
+            "Content-Type":"application/json"
+        }
+    }).then(res=>res.json()).then(data=>{
+      console.log(data.userToken,"login data")
+      setToken(data.userToken);
+      localStorage.setItem("token",data.userToken);
+      setLoggedIn(true);
+
+      window.location.href = "/dashboard";
+    })
   };
 
   return (
@@ -85,6 +108,8 @@ function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={formState.user_firstName}
+                onChange={e=>setFormState({...formState,user_firstName:e.target.value})}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -95,6 +120,8 @@ function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={formState.user_lastName}
+                onChange={e=>setFormState({...formState,user_lastName:e.target.value})}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -105,6 +132,8 @@ function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={formState.user_email}
+                  onChange={e=>setFormState({...formState,user_email:e.target.value})}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,6 +145,8 @@ function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={formState.user_password}
+                  onChange={e=>setFormState({...formState,user_password:e.target.value})}
                 />
               </Grid>
             </Grid>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Messenger from "./pages/Messenger.js";
+import Home from './pages/Home'
 
 // import  user useCOntext onto this page then wrap all the components with the provider
 // in the context api, grab username from token
@@ -14,6 +15,7 @@ import axios from "axios";
 
 function App() {
   const [token, setToken] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState({
     user_id: 0,
     user_name: "",
@@ -45,15 +47,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className=""></h1>
       <BrowserRouter>
-        {user.user_name !== "" ? <Header /> : <div></div>}
+        {<Header setLoggedIn={setLoggedIn}/>}
         <Routes>
-          <Route exact path="/messenger" element={<Messenger user={user} />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/messenger" element={<Messenger user={user}/>} />
+          <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken}/>} />
+          <Route path="/dashboard" element={(<Dashboard/>)} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

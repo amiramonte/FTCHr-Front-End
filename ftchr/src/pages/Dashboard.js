@@ -4,11 +4,14 @@ import Map from "../components/Map";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
 import Login from "./Login";
+import PostModal from '../components/PostModal'
+import moment from 'moment'
 
 export default function Dashboard() {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
   //front end fetch request to collect all of the posts
+
   useEffect(() => {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())
@@ -17,7 +20,6 @@ export default function Dashboard() {
         setPosts(data);
       });
   }, []);
-  //
   const [user, setUser] = useState({
     user_id: 0,
     user_name: "",
@@ -50,22 +52,35 @@ export default function Dashboard() {
       });
   }, []);
 
+  // const [comments, setComments] = useState([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:3001/api/comment/getallcomments")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setComments(data);
+  //     });
+  // }, []);
+  console.log(posts, "publicc posts")
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
-            {posts.map((posts) => (
+            <PostModal setPosts={setPosts}/>
+            <div className="postContent">
+            {posts.map((post) => (
               <Postcard
-                key={posts.id}
-                username={posts.User.user_name}
-                UserId={posts.UserId}
-                title={posts.post_title}
-                content={posts.post_content}
-                comments={posts.Comments.map((Comment) => Comment)}
+                key={post.id}
+                username={post.User.user_name}
+                UserId={post.UserId}
+                title={post.post_title}
+                content={post.post_content}
+                comments={post.Comments.map((Comment) => Comment)}
               />
             ))}
+            </div>
           </div>
           <div>
             <Map />

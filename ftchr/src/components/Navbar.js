@@ -111,7 +111,7 @@ const menuItems = [
   { label: "Organizations", path: "/organizations" },
 ];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({setLoggedIn}) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -138,6 +138,7 @@ const ResponsiveAppBar = () => {
     //   id:0,
     //   Blogs:[]
     // })
+    setLoggedIn(false);
     window.location.href = '/login'
   }
 
