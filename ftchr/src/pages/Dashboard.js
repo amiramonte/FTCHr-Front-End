@@ -16,8 +16,8 @@ export default function Dashboard() {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setPosts(data.reverse());
+        console.log(data, "post data");
+        setPosts(data);
       });
   }, []);
   const [user, setUser] = useState({
@@ -72,14 +72,12 @@ export default function Dashboard() {
             <div className="postContent">
             {posts.map((post) => (
               <Postcard
-                key={post.id}
-                username={post.User.user_name}
-                UserId={post.UserId}
-                title={post.post_title}
-                content={post.post_content}
-                comments={post.Comments.map(
-                  (Comments) => Comments.comment_body
-                )}
+                key={posts.id}
+                username={posts.User.user_name}
+                UserId={posts.UserId}
+                title={posts.post_title}
+                content={posts.post_content}
+                comments={posts.Comments.map((Comment) => Comment)}
               />
             ))}
             </div>
