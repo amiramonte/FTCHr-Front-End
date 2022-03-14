@@ -85,7 +85,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <Map />
+            <Map posts={posts} />
           </div>
         </div>
       ) : (
