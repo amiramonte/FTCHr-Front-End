@@ -5,8 +5,8 @@ import "../styles/style.css";
 import { useEffect, useState } from "react";
 import Login from "./Login";
 import PostModal from "../components/PostModal";
-import moment from "moment";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
+import AddPost from '../components/AddPost'
 
 export default function Dashboard() {
   //Creating a use state for posts
@@ -53,16 +53,8 @@ export default function Dashboard() {
       });
   }, []);
 
-  // const [comments, setComments] = useState([]);
-  // useEffect(() => {
-  //   fetch("http://localhost:3001/api/comment/getallcomments")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setComments(data);
-  //     });
-  // }, []);
   console.log(posts, "publicc posts");
+  console.log(user, "loggedin user")
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
@@ -70,7 +62,8 @@ export default function Dashboard() {
         <div className="dashboard-flex flex-row">
           <div className="postcards">
             <CloudinaryUploadWidget />
-            <PostModal setPosts={setPosts} />
+            <AddPost setPosts={setPosts} />
+            {/* <PostModal setPosts={setPosts} /> */}
             <div className="postContent">
               {posts.map((post) => (
                 <Postcard
