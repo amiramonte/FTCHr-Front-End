@@ -50,12 +50,12 @@ export default function Postcard(props) {
   };
 
   return (
-    <div>
+    <div onClick={props.clickHandler}>
       <Card sx={{ maxWidth: 450 }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
+              {props.username[0].toUpperCase()}
             </Avatar>
           }
           action={
@@ -114,13 +114,12 @@ export default function Postcard(props) {
               </Button>
             </Box>
             <Typography paragraph>Comments:</Typography>
-            {comments.map((comment) => (
-              <Typography paragraph>
+            {comments.map((comment, index) => (
+              <Typography paragraph key={index}>
                 <a href="#">{comment.User.user_name}</a>
                 <span>: {comment.comment_body}</span>
               </Typography>
             ))}
-            {/* <Typography paragraph>{props.comments}</Typography> */}
           </CardContent>
         </Collapse>
       </Card>

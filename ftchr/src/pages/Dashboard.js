@@ -2,15 +2,17 @@ import React from "react";
 import Postcard from "../components/Postcard";
 import Map from "../components/Map";
 import "../styles/style.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Login from "./Login";
 import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
-import AddPost from '../components/AddPost'
+import AddPost from "../components/AddPost";
 
 export default function Dashboard() {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
+  const scrollRef = useRef();
+  const [currentPost, setCurrentPost] = useState(null);
   //front end fetch request to collect all of the posts
 
   useEffect(() => {
@@ -20,14 +22,7 @@ export default function Dashboard() {
         console.log(data, "post data");
         setPosts(data);
       });
-  }, []);
-  const [user, setUser] = useState({
-    user_id: 0,
-    user_name: "",
-  });
-  const [token, setToken] = useState("");
 
-  useEffect(() => {
     const savedToken = localStorage.getItem("token");
     fetch("http://localhost:3001/api/user/verifieduser", {
       method: "GET",
@@ -52,11 +47,23 @@ export default function Dashboard() {
         }
       });
   }, []);
+  const [user, setUser] = useState({
+    user_id: 0,
+    user_name: "",
+  });
+  const [token, setToken] = useState("");
+
+
 
   console.log(posts, "publicc posts");
-  console.log(user, "loggedin user")
+  console.log(user, "loggedin user");
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
+  function handlePostClick(post){
+    console.log("Hiiii")
+    setCurrentPost(post)
+  }
   return (
+    
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
@@ -66,19 +73,24 @@ export default function Dashboard() {
             {/* <PostModal setPosts={setPosts} /> */}
             <div className="postContent">
               {posts.map((post) => (
-                <Postcard
-                  key={post.id}
-                  username={post.User.user_name}
-                  UserId={post.UserId}
-                  title={post.post_title}
-                  content={post.post_content}
-                  comments={post.Comments.map((Comment) => Comment)}
-                />
+                <div
+                 
+                >
+                  <Postcard
+                    clickHandler={()=>handlePostClick(post)}
+                    key={post.id}
+                    username={post.User.user_name}
+                    UserId={post.UserId}
+                    title={post.post_title}
+                    content={post.post_content}
+                    comments={post.Comments.map((Comment) => Comment)}
+                  />
+                </div>
               ))}
             </div>
           </div>
           <div>
-            <Map posts={posts} />
+            <Map posts={posts} currentPost={currentPost} />
           </div>
         </div>
       ) : (
