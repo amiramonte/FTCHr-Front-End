@@ -33,27 +33,6 @@ function GetIcon(_iconSize) {
 }
 const [latLong, setLatLong] = useState([47.606, -122.329]);
 
-// function renderMap(){
-//   return (
-// <div id="map">
-//     {console.log(latLong, "latlong inside component")}
-//       <MapContainer className="map" center={latLong} zoom={15}>
-        
-//         <TileLayer
-//           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-//           url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
-//         />
-//         {console.log(posts, "user posts")}
-//         <Fly center={latLong}/>
-//         <React.Fragment >
-//             {posts.map(post => <Marker key={post.id} position={[post.post_latitude, post.post_longitude]} > <Popup>{post.post_title}</Popup> </Marker>)}
-//         </React.Fragment>
-//       </MapContainer>
-//     </div>
-//   )
-// }
-// const map = useMap();
-// map.setCenter([currentPost?.post_latitude || 47.606, currentPost?.post_longitude || -122.329]);
 useEffect(()=>{
   setLatLong([currentPost?.post_latitude || latLong[0], currentPost?.post_longitude || latLong[1]])
   console.log(latLong,"map")  
