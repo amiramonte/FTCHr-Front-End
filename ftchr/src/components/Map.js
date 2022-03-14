@@ -37,7 +37,7 @@ export default function Map({ posts }) {
           </Marker>;
         })} */}
         <React.Fragment>
-            {posts.map(post => <Marker position={[post.post_latitude, post.post_longitude]} > <Popup>{post.post_title}</Popup> </Marker>)}
+            {posts.map(post => post.post_latitude?<Marker position={[post?.post_latitude, post?.post_longitude]} > <Popup>{post?.post_title}</Popup> </Marker>:null)}
         </React.Fragment>
         {/* Below works, du ma. */}
         {/* <Marker position={[47.606, -122.329]}>

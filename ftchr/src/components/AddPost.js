@@ -8,7 +8,7 @@ import NewPostFrom from './NewPostForm'
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
 
 
-export default function SimpleAccordion() {
+export default function SimpleAccordion({setPosts}) {
   return (
     <div>
       <Accordion>
@@ -21,7 +21,7 @@ export default function SimpleAccordion() {
           <CloudinaryUploadWidget />
         </AccordionSummary>
         <AccordionDetails>
-            <NewPostFrom />
+            <NewPostFrom setPosts={setPosts} />
             
         </AccordionDetails>
       </Accordion>
