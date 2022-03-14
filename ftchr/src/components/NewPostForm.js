@@ -15,6 +15,10 @@ export default function FormPropsTextFields({ setPosts }) {
     const savedToken = localStorage.getItem("token");
     setToken(savedToken);
   }, []);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
   const createPost = (e) => {
     e.preventDefault();
@@ -69,7 +73,6 @@ export default function FormPropsTextFields({ setPosts }) {
           }
         />
       </div>
-      <CloudinaryUploadWidget />
       <button onClick={createPost}>Create Post</button>
     </Box>
   );
