@@ -5,7 +5,7 @@ import NewPostButton from "./NewPostButton";
 import { useState, useEffect } from "react";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
 
-export default function FormPropsTextFields({ setPosts }) {
+export default function FormPropsTextFields({ setPosts, posts, getAllPost }) {
   const [token, setToken] = useState("");
   const [formState, setFormState] = useState({
     post_title: "",
@@ -20,28 +20,30 @@ export default function FormPropsTextFields({ setPosts }) {
     e.preventDefault();
   }
 
-  const createPost = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:3001/api/post/addpost", {
-      method: "POST",
-      body: JSON.stringify(formState),
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
+    const createPost = (e) => {
+      e.preventDefault();
+      fetch("http://localhost:3001/api/post/addpost", {
+        method: "POST",
+        body: JSON.stringify(formState),
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "created post data");
+        getAllPost()
         // setPosts(prevTodos => [...prevTodos, data]);
-        fetch("http://localhost:3001/api/post/getallposts")
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            setPosts(data.reverse());
-          });
+        // fetch("http://localhost:3001/api/post/getallposts")
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //     setPosts(data.reverse());
+        //   });
       });
-  };
+    };  
+  
   return (
     <Box
       component="form"

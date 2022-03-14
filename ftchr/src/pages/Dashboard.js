@@ -4,22 +4,27 @@ import Map from "../components/Map";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
 import Login from "./Login";
-import PostModal from "../components/PostModal";
+// import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
 import AddPost from '../components/AddPost'
+import NewPostForm from '../components/NewPostForm';
 
 export default function Dashboard() {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
   //front end fetch request to collect all of the posts
 
-  useEffect(() => {
+  const getAllPost = () => {
     fetch("http://localhost:3001/api/post/getallposts")
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "post data");
         setPosts(data);
       });
+  }
+
+  useEffect(() => {
+    getAllPost()
   }, []);
   const [user, setUser] = useState({
     user_id: 0,
@@ -61,14 +66,15 @@ export default function Dashboard() {
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
+            <NewPostForm setPosts={setPosts} posts={posts} getAllPost={getAllPost} />
             <CloudinaryUploadWidget />
-            <AddPost setPosts={setPosts} />
-            {/* <PostModal setPosts={setPosts} /> */}
+            {/* <AddPost setPosts={setPosts} />
+            <PostModal setPosts={setPosts} /> */}
             <div className="postContent">
               {posts.map((post) => (
                 <Postcard
                   key={post.id}
-                  username={post.User.user_name}
+                  username={post.User?.user_name}
                   UserId={post.UserId}
                   title={post.post_title}
                   content={post.post_content}
