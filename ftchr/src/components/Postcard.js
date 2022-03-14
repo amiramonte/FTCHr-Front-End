@@ -17,7 +17,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import image from '../images/naruto.jpg';
+import image from "../images/naruto.jpg";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
