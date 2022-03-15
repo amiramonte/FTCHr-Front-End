@@ -135,23 +135,6 @@ function SignUp({ setLoggedIn, setToken }) {
                     }
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
-                    value={formState.user_lastName}
-                    onChange={(e) =>
-                      setFormState({
-                        ...formState,
-                        user_lastName: e.target.value,
-                      })
-                    }
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
