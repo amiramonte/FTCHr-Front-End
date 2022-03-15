@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRef, useState } from "react";
+import prefixURL from '../../utils/helper';
 
 function Copyright(props) {
   return (
@@ -32,6 +33,7 @@ function Copyright(props) {
   );
 }
 
+
 const theme = createTheme();
 
 function Login({ setLoggedIn }) {
@@ -47,7 +49,7 @@ function Login({ setLoggedIn }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formState);
-    fetch("http://localhost:3001/api/user/sign-in", {
+    fetch(`${prefixURL}/api/user/sign-in`, {
       method: "POST",
       body: JSON.stringify(formState),
       headers: {

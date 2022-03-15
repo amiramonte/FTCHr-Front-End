@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './conversation.css'
 import image from '../../images/naruto.jpg';
 import axios from 'axios';
+import prefixURL from '../../../utils/helper';
 
 export default function Conversations({ conversation, currentUser }) {
   const members = [conversation.senderId, conversation.recieverId];
@@ -14,7 +15,7 @@ export default function Conversations({ conversation, currentUser }) {
     // const friendId = "amiramonte"
     const getUser = async() => {
       try {
-        const response = await axios('http://localhost:3001/api/user/getuser/' + friendId) 
+        const response = await axios(`${prefixURL}/api/user/getuser/${friendId}`) 
         // const response = await axios.get('http://localhost:3001/api/user/getuser/amiramonte') 
         setUser(response.data);
       } catch(err) {

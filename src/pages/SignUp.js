@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState} from 'react'
+import prefixURL from '../../utils/helper';
 
 function Copyright(props) {
   return (
@@ -47,7 +48,7 @@ function SignUp({setLoggedIn, setToken}) {
       password: data.get('password'),
     });
 
-    fetch("http://localhost:3001/api/user/sign-up",{
+    fetch(`${prefixURL}/api/user/sign-up`,{
         method:"POST",
         body:JSON.stringify(formState),
         headers:{

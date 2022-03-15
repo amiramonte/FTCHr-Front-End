@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import NewPostButton from "./NewPostButton";
 import { useState, useEffect } from "react";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
+import prefixURL from "../../utils/helper";
 
 export default function FormPropsTextFields({ setPosts, posts, getAllPost }) {
   const [token, setToken] = useState("");
@@ -22,7 +23,7 @@ export default function FormPropsTextFields({ setPosts, posts, getAllPost }) {
 
     const createPost = (e) => {
       e.preventDefault();
-      fetch("http://localhost:3001/api/post/addpost", {
+      fetch(`${prefixURL}/api/post/addpost`, {
         method: "POST",
         body: JSON.stringify(formState),
         headers: {

@@ -8,6 +8,7 @@ import Login from "./Login";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
 import AddPost from '../components/AddPost'
 import NewPostForm from '../components/NewPostForm';
+import prefixURL from "../../utils/helper";
 
 export default function Dashboard() {
   //Creating a use state for posts
@@ -15,7 +16,7 @@ export default function Dashboard() {
   //front end fetch request to collect all of the posts
 
   const getAllPost = () => {
-    fetch("http://localhost:3001/api/post/getallposts")
+    fetch(`${prefixURL}/api/post/getallposts`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "post data");
@@ -34,7 +35,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
-    fetch("http://localhost:3001/api/user/verifieduser", {
+    fetch(`${prefixURL}/api/user/verifieduser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
