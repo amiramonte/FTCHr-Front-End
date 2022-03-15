@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRef, useState } from "react";
 import prefixURL from "../utils/helper";
+import Logo from "../assets/logowithphrasetrimmed.png";
 
 function Copyright(props) {
   return (
