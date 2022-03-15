@@ -10,6 +10,7 @@ export default function FormPropsTextFields({
   posts,
   getAllPost,
   photo,
+  setLocation
 }) {
   const [token, setToken] = useState("");
   const [formState, setFormState] = useState({
@@ -40,14 +41,29 @@ export default function FormPropsTextFields({
       .then((data) => {
         console.log(data, "created post data");
         getAllPost();
-        // setPosts(prevTodos => [...prevTodos, data]);
-        // fetch("http://localhost:3001/api/post/getallposts")
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //     setPosts(data.reverse());
-        //   });
       });
+
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      
+      function success(pos) {
+        var crd = pos.coords;
+        setLocation(crd);
+        console.log('Your current position is:');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`);
+        set
+      }
+      
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+      
+      navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
   return (
