@@ -11,8 +11,7 @@ import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Dashboard from "./pages/Dashboard.js";
 import Profile from "./pages/Profile.js";
-import axios from "axios";
-import prefixURL from "../utils/helper.js";
+import prefixURL from "./utils/helper";
 
 function App() {
   const [token, setToken] = useState("");
@@ -54,7 +53,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/messenger" element={<Messenger user={user}/>} />
           <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken}/>} />
-          <Route path="/dashboard" element={(<Dashboard user={user}/>)} />
+          <Route path="/dashboard" element={<Dashboard user={user}/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
         </Routes>

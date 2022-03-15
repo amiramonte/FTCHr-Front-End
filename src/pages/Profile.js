@@ -3,7 +3,7 @@ import UserInfo from "../components/UserInfo";
 import PetSection from "../components/PetsSection";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
-import prefixURL from "../../utils/helper";
+import prefixURL from "../utils/helper";
 
 function Profile() {
   const [pets, setPets] = useState([]);

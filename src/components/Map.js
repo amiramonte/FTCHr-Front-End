@@ -32,7 +32,7 @@ export default function Map({ posts }) {
         />
         {console.log(posts, "user posts")}
         <React.Fragment>
-            {posts.map(post => post.post_latitude?<Marker position={[post?.post_latitude, post?.post_longitude]} > <Popup>{post?.post_title}</Popup> </Marker>:null)}
+            {posts.map(post => post.post_latitude?<Marker key ={[post?.post_latitude, post?.post_longitude]} position={[post?.post_latitude, post?.post_longitude]} > <Popup>{post?.post_title}</Popup> </Marker>:null)}
         </React.Fragment>
       </MapContainer>
     </div>

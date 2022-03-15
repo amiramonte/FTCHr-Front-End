@@ -8,7 +8,7 @@ import io from "socket.io-client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
-import prefixURL from "../../utils/helper";
+import prefixURL from "../utils/helper";
 
 export default function Messenger({ user }) {
   const [token, setToken] = useState("");

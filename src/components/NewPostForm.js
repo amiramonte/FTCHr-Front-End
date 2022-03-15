@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import NewPostButton from "./NewPostButton";
 import { useState, useEffect } from "react";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
-import prefixURL from "../../utils/helper";
+import prefixURL from "../utils/helper";
 
 export default function FormPropsTextFields({
   setPosts,

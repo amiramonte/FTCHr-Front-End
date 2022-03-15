@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState} from 'react'
-import prefixURL from '../../utils/helper';
+import prefixURL from '../utils/helper';
 
 function Copyright(props) {
   return (
