@@ -10,7 +10,7 @@ import AddPost from '../components/AddPost'
 import NewPostForm from '../components/NewPostForm';
 import prefixURL from "../../utils/helper";
 
-export default function Dashboard({user}) {
+export default function Dashboard({ user }) {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
   //renders image from Cloudinary

@@ -66,17 +66,20 @@ export default function Postcard(props) {
       .then((res) => res.json())
       .then((data) => {
         // make a get route that gets all the comments for that post and set comments to be that then
-        fetch(`http://localhost:3001/api/comment/getpostcomments/${data.PostId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          },
-        })
+        fetch(
+          `http://localhost:3001/api/comment/getpostcomments/${data.PostId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
           .then((res) => {
             return res.json();
           })
           .then((data) => {
-            console.log(data, "data from the post comments routes")
+            console.log(data, "data from the post comments routes");
             setComments(data);
             props.getAllPost();
             console.log(data, "created post data");
