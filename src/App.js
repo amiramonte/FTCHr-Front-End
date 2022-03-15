@@ -54,7 +54,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/messenger" element={<Messenger user={user}/>} />
           <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken}/>} />
-          <Route path="/dashboard" element={(<Dashboard/>)} />
+          <Route path="/dashboard" element={(<Dashboard user={user}/>)} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
         </Routes>
