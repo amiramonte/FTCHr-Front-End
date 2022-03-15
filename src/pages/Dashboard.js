@@ -2,7 +2,7 @@ import React from "react";
 import Postcard from "../components/Postcard";
 import Map from "../components/Map";
 import "../styles/style.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Login from "./Login";
 // import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
@@ -12,6 +12,8 @@ import NewPostForm from '../components/NewPostForm';
 export default function Dashboard() {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
+  const scrollRef = useRef();
+  const [currentPost, setCurrentPost] = useState(null);
   //front end fetch request to collect all of the posts
 
   const getAllPost = () => {
@@ -58,10 +60,16 @@ export default function Dashboard() {
       });
   }, []);
 
+
   console.log(posts, "publicc posts");
-  console.log(user, "loggedin user")
+  console.log(user, "loggedin user");
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
+  function handlePostClick(post){
+    console.log("Hiiii")
+    setCurrentPost(post)
+  }
   return (
+    
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
@@ -84,7 +92,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <Map posts={posts} />
+            <Map posts={posts} currentPost={currentPost} />
           </div>
         </div>
       ) : (
