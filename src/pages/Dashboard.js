@@ -41,14 +41,16 @@ export default function Dashboard({ user }) {
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
-            <NewPostForm
-              setPosts={setPosts}
-              posts={posts}
-              getAllPost={getAllPost}
-              photo={photo}
-              setLocation={setLocation}
-            />
-            <CloudinaryUploadWidget setPhoto={setPhoto} />
+            <div className="addPostStyle">
+              <NewPostForm
+                setPosts={setPosts}
+                posts={posts}
+                getAllPost={getAllPost}
+                photo={photo}
+                setLocation={setLocation}
+              />
+              <CloudinaryUploadWidget setPhoto={setPhoto} />
+            </div>
             <div className="postContent">
               {posts.map((post) => (
                 <Postcard

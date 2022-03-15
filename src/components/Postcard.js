@@ -152,6 +152,7 @@ export default function Postcard(props) {
                 />
               </div>
               <Button
+                class="commentButton"
                 variant="outlined"
                 size="small"
                 fullWidth={false}

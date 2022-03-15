@@ -104,7 +104,7 @@ export default function FormPropsTextFields({
           }
         />
       </div>
-      <button onClick={createPost}>Create Post</button>
+      <button onClick={createPost} class="cloudinary-button">Create Post</button>
     </Box>
   );
 }
