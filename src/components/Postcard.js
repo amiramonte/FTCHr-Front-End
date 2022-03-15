@@ -20,7 +20,6 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import prefixURL from "../utils/helper";
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -72,15 +71,12 @@ export default function Postcard(props) {
       .then((res) => res.json())
       .then((data) => {
         // make a get route that gets all the comments for that post and set comments to be that then
-        fetch(
-          `${prefixURL}/api/comment/getpostcomments/${data.PostId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(`${prefixURL}/api/comment/getpostcomments/${data.PostId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((res) => {
             return res.json();
           })

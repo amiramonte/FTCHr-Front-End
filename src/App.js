@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Messenger from "./pages/Messenger.js";
-import Home from './pages/Home'
+import Home from "./pages/Home";
 
 // import  user useCOntext onto this page then wrap all the components with the provider
 // in the context api, grab username from token
@@ -11,11 +11,12 @@ import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Dashboard from "./pages/Dashboard.js";
 import Profile from "./pages/Profile.js";
+import axios from "axios";
 import prefixURL from "./utils/helper";
 
 function App() {
   const [token, setToken] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({
     user_id: 0,
     user_name: "",
@@ -48,14 +49,17 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {<Header setLoggedIn={setLoggedIn}/>}
+        {<Header setLoggedIn={setLoggedIn} />}
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/messenger" element={<Messenger user={user}/>} />
-          <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken}/>} />
-          <Route path="/dashboard" element={<Dashboard user={user}/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
+          <Route path="/messenger" element={<Messenger user={user} />} />
+          <Route
+            path="/signup"
+            element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken} />}
+          />
+          <Route path="/dashboard" element={<Dashboard user={user} />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
         </Routes>
         <Footer />
       </BrowserRouter>

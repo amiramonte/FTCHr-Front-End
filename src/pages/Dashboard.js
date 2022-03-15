@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 // import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
-import AddPost from '../components/AddPost'
-import NewPostForm from '../components/NewPostForm';
+import AddPost from "../components/AddPost";
+import NewPostForm from "../components/NewPostForm";
 import prefixURL from "../utils/helper";
 
 export default function Dashboard({ user }) {
