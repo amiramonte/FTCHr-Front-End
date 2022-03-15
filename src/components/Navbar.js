@@ -132,6 +132,12 @@ const ResponsiveAppBar = ({setLoggedIn}) => {
 
   const logout =(e) =>{
     localStorage.removeItem("token");
+    // setToken("");
+    // setUserData({
+    //   email:"",
+    //   id:0,
+    //   Blogs:[]
+    // })
     setLoggedIn(false);
     window.location.href = '/login'
   }
