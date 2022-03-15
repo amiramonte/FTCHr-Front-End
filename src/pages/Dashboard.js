@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 // import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
-import AddPost from '../components/AddPost'
-import NewPostForm from '../components/NewPostForm';
+import AddPost from "../components/AddPost";
+import NewPostForm from "../components/NewPostForm";
 import prefixURL from "../utils/helper";
 
 export default function Dashboard({ user }) {
@@ -30,9 +30,11 @@ export default function Dashboard({ user }) {
   useEffect(() => {
     getAllPost();
   }, []);
-
   console.log(posts, "public posts");
   console.log(user, "loggedin user");
+  
+
+
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
@@ -62,6 +64,7 @@ export default function Dashboard({ user }) {
                   content={post.post_content}
                   comments={post.Comments.map((Comment) => Comment)}
                   getAllPost={getAllPost}
+                  setPosts = {setPosts}
                 />
               ))}
             </div>

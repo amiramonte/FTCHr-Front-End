@@ -13,8 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRef, useState } from "react";
-import Logo from "../assets/logowithphrasetrimmed.png";
-import prefixURL from '../utils/helper';
+import prefixURL from "../utils/helper";
 
 function Copyright(props) {
   return (
@@ -33,7 +32,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 
 const theme = createTheme();
 

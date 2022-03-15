@@ -20,7 +20,6 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import prefixURL from "../utils/helper";
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -35,14 +34,18 @@ const ExpandMore = styled((props) => {
 export default function Postcard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [token, setToken] = useState("");
-  const [comments, setComments] = React.useState([]);
+  const [comments, setComments] = React.useState(props.comments);
 
   React.useEffect(() => {
-    setComments(props.comments);
+    // setComments(props.comments);
     const savedToken = localStorage.getItem("token");
     setToken(savedToken);
+    
   }, []);
 
+  React.useEffect(()=>{
+    setValue({ ...value, UserId: props.user.user_id});
+  },[props.user])
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -53,12 +56,12 @@ export default function Postcard(props) {
     PostId: props.post.id,
   });
 
-  console.log(value);
+ console.log("");
   const handleChange = async (event) => {
     setValue({ comment_body: event.target.value });
     setValue({ ...value, UserId: props.user.user_id, PostId: props.post.id });
     console.log(value, "supposed new comment we are going to use");
-    await fetch(`${prefixURL}/api/comment/addcomment`, {
+    fetch(`${prefixURL}/api/comment/addcomment`, {
       method: "POST",
       body: JSON.stringify(value),
       headers: {
@@ -68,15 +71,12 @@ export default function Postcard(props) {
       .then((res) => res.json())
       .then((data) => {
         // make a get route that gets all the comments for that post and set comments to be that then
-        fetch(
-          `${prefixURL}/api/comment/getpostcomments/${data.PostId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(`${prefixURL}/api/comment/getpostcomments/${data.PostId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((res) => {
             return res.json();
           })
@@ -163,7 +163,7 @@ export default function Postcard(props) {
             </Box>
             <Typography paragraph>Comments:</Typography>
             {comments.map((comment) => (
-              <Typography paragraph>
+              <Typography  key = {comment.id}>
                 <a href="#">{comment.User.user_name}</a>
                 <span>: {comment.comment_body}</span>
               </Typography>

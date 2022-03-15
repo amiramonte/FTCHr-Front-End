@@ -1,5 +1,7 @@
 let deployed = false;
 
-let prefixURL = (deployed) ? 'https://ftchrbackend.herokuapp.com' : 'http://localhost:3001'
+let prefixURL = deployed
+  ? "https://ftchrbackend.herokuapp.com"
+  : "http://localhost:3001";
 
-export default prefixURL; 
+export default prefixURL;
