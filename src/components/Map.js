@@ -31,36 +31,9 @@ export default function Map({ posts }) {
           url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
         />
         {console.log(posts, "user posts")}
-        {/* {posts.map((post) => {
-          <Marker key={post.id} position={[post.post_latitude, post.post_longitude]} icon={GetIcon(20)}>
-            <Popup>{post.post_title}</Popup>
-          </Marker>;
-        })} */}
         <React.Fragment>
             {posts.map(post => post.post_latitude?<Marker position={[post?.post_latitude, post?.post_longitude]} > <Popup>{post?.post_title}</Popup> </Marker>:null)}
         </React.Fragment>
-        {/* Below works, du ma. */}
-        {/* <Marker position={[47.606, -122.329]}>
-          <Popup>
-            Chilling with my doggo, come hang! <br /> 5PM
-          </Popup>
-        </Marker>
-        <Marker position={[47.606, -122.319]}>
-          <Popup>
-            Chilling with my doggo, come hang! <br /> 5PM
-          </Popup>
-        </Marker>
-        <Marker position={[47.606, -122.339]}>
-          <Popup>
-            Chilling with my doggo, come hang! <br /> 5PM
-          </Popup>
-        </Marker> */}
-
-        {/* <Marker position={[47.606, -122.331]}>
-          <Popup>
-            Pet my cat! <br /> 3PM
-          </Popup>
-        </Marker> */}
       </MapContainer>
     </div>
   );
