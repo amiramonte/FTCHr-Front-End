@@ -90,7 +90,7 @@ export default function Postcard(props) {
   };
 
   return (
-    <div>
+    <div onClick={props.clickHandler}>
       <Card sx={{ maxWidth: 450 }}>
         <CardHeader
           avatar={

@@ -6,6 +6,7 @@ import {
   Popup,
   Circle,
   CircleMarker,
+  useMap
 } from "react-leaflet";
 import L from "leaflet";
 import { Icon } from "leaflet";
@@ -15,17 +16,27 @@ import { useEffect, useState } from "react";
 
 const redOptions = { color: "red" };
 
-function GetIcon(_iconSize) {
-  return L.icon({
-    iconUrl: requirePropFactory("./assets/icons/dogemoji.png"),
-    iconSize: _iconSize,
-  });
-}
+export default function Map({ currentPost, posts }) {
+  function Fly({center}) {
+    console.log(center, "center");
+    const map = useMap();
+    map.setView(center);
+    return null;
+  }
 
-export default function Map({ posts }) {
+  const [latLong, setLatLong] = useState([47.606, -122.329]);
+
+  useEffect(()=>{
+    setLatLong([currentPost?.post_latitude || latLong[0], currentPost?.post_longitude || latLong[1]])
+    console.log(latLong,"map")  
+    // return renderMap()
+  },[currentPost])                                  
+  
+
   return (
     <div id="map">
-      <MapContainer className="map" center={[47.606, -122.332]} zoom={15}>
+      <MapContainer className="map" center={latLong} zoom={15}>
+      <Fly center={latLong}/>
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
           url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
