@@ -8,7 +8,7 @@ import io from "socket.io-client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
-import prefixURL from "../../utils/helper";
+import prefixURL from "../utils/helper";
 
 export default function Messenger({ user }) {
   const [token, setToken] = useState("");
@@ -48,9 +48,7 @@ export default function Messenger({ user }) {
     const getAllUsers = async () => {
       try {
         // request gets all users
-        const response = await axios.get(
-          `${prefixURL}/api/user/getallusers`
-        );
+        const response = await axios.get(`${prefixURL}/api/user/getallusers`);
         const userArr = response.data.map((userobj) => userobj.user_name);
         console.log(userArr, "user array ");
         setAllUsers(userArr);
@@ -126,10 +124,7 @@ export default function Messenger({ user }) {
     });
 
     try {
-      const response = await axios.post(
-        `${prefixURL}/api/messages`,
-        message
-      );
+      const response = await axios.post(`${prefixURL}/api/messages`, message);
       setMessages([...messages, response.data]);
       setNewMessage("");
     } catch (err) {
@@ -181,7 +176,11 @@ export default function Messenger({ user }) {
             options={allUsers}
             sx={{ width: 300 }}
             renderInput={(params) => (
-              <TextField required {...params} label="Select a User to chat with" />
+              <TextField
+                required
+                {...params}
+                label="Select a User to chat with"
+              />
             )}
           />
           <Button
