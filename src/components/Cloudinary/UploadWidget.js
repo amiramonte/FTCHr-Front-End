@@ -32,7 +32,7 @@ class CloudinaryUploadWidget extends Component {
   render() {
     return (
       <button id="upload_widget" className="cloudinary-button">
-        Upload
+        Add a Photo
       </button>
     );
   }

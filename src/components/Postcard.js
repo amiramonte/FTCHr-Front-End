@@ -18,7 +18,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-import prefixURL from "../../utils/helper";
+import prefixURL from "../utils/helper";
 
 
 const ExpandMore = styled((props) => {
@@ -152,6 +152,7 @@ export default function Postcard(props) {
                 />
               </div>
               <Button
+                class="commentButton"
                 variant="outlined"
                 size="small"
                 fullWidth={false}

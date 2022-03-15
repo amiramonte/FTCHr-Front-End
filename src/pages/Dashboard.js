@@ -8,7 +8,7 @@ import Login from "./Login";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
 import AddPost from '../components/AddPost'
 import NewPostForm from '../components/NewPostForm';
-import prefixURL from "../../utils/helper";
+import prefixURL from "../utils/helper";
 
 export default function Dashboard({ user }) {
   //Creating a use state for posts
@@ -39,14 +39,16 @@ export default function Dashboard({ user }) {
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
-            <NewPostForm
-              setPosts={setPosts}
-              posts={posts}
-              getAllPost={getAllPost}
-              photo={photo}
-              setLocation={setLocation}
-            />
-            <CloudinaryUploadWidget setPhoto={setPhoto} />
+            <div className="addPostStyle">
+              <NewPostForm
+                setPosts={setPosts}
+                posts={posts}
+                getAllPost={getAllPost}
+                photo={photo}
+                setLocation={setLocation}
+              />
+              <CloudinaryUploadWidget setPhoto={setPhoto} />
+            </div>
             <div className="postContent">
               {posts.map((post) => (
                 <Postcard

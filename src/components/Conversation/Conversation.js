@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './conversation.css'
 import image from '../../images/naruto.jpg';
 import axios from 'axios';
-import prefixURL from '../../../utils/helper';
+import prefixURL from '../../utils/helper';
 
 export default function Conversations({ conversation, currentUser }) {
   const members = [conversation.senderId, conversation.recieverId];

@@ -12,7 +12,7 @@ import SignUp from "./pages/SignUp.js";
 import Dashboard from "./pages/Dashboard.js";
 import Profile from "./pages/Profile.js";
 import axios from "axios";
-import prefixURL from "../utils/helper.js";
+import prefixURL from "../src/utils/helper";
 
 function App() {
   const [token, setToken] = useState("");
