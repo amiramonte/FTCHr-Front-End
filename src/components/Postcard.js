@@ -17,6 +17,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useState } from "react";
+import prefixURL from "../../utils/helper";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -31,21 +34,59 @@ const ExpandMore = styled((props) => {
 
 export default function Postcard(props) {
   const [expanded, setExpanded] = React.useState(false);
-
+  const [token, setToken] = useState("");
   const [comments, setComments] = React.useState([]);
 
   React.useEffect(() => {
     setComments(props.comments);
+    const savedToken = localStorage.getItem("token");
+    setToken(savedToken);
   }, []);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState({
+    UserId: props.user.user_id,
+    comment_body: "",
+    PostId: props.post.id,
+  });
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  console.log(value);
+  const handleChange = async (event) => {
+    setValue({ comment_body: event.target.value });
+    setValue({ ...value, UserId: props.user.user_id, PostId: props.post.id });
+    console.log(value, "supposed new comment we are going to use");
+    await fetch(`${prefixURL}/api/comment/addcomment`, {
+      method: "POST",
+      body: JSON.stringify(value),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // make a get route that gets all the comments for that post and set comments to be that then
+        fetch(
+          `${prefixURL}/api/comment/getpostcomments/${data.PostId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data, "data from the post comments routes");
+            setComments(data);
+            props.getAllPost();
+            console.log(data, "created post data");
+          });
+      });
   };
 
   return (
@@ -104,11 +145,18 @@ export default function Postcard(props) {
                   label="Leave Comment"
                   multiline
                   maxRows={4}
-                  value={value}
-                  onChange={handleChange}
+                  value={value.comment_body}
+                  onChange={(e) =>
+                    setValue({ ...value, comment_body: e.target.value })
+                  }
                 />
               </div>
-              <Button variant="outlined" size="small" fullWidth={false}>
+              <Button
+                variant="outlined"
+                size="small"
+                fullWidth={false}
+                onClick={handleChange}
+              >
                 Submit
               </Button>
             </Box>

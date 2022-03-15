@@ -4,12 +4,14 @@ import TextField from "@mui/material/TextField";
 import NewPostButton from "./NewPostButton";
 import { useState, useEffect } from "react";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
+import prefixURL from "../../utils/helper";
 
 export default function FormPropsTextFields({
   setPosts,
   posts,
   getAllPost,
   photo,
+  setLocation,
 }) {
   const [token, setToken] = useState("");
   const [formState, setFormState] = useState({
@@ -22,32 +24,50 @@ export default function FormPropsTextFields({
     setToken(savedToken);
   }, []);
 
+  useEffect(() => {
+    setFormState({ ...formState, post_photo: photo });
+  }, [photo]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const createPost = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:3001/api/post/addpost", {
-      method: "POST",
-      body: JSON.stringify(formState),
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
+    const createPost = (e) => {
+      e.preventDefault();
+      fetch(`${prefixURL}/api/post/addpost`, {
+        method: "POST",
+        body: JSON.stringify(formState),
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "created post data");
         getAllPost();
-        // setPosts(prevTodos => [...prevTodos, data]);
-        // fetch("http://localhost:3001/api/post/getallposts")
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //     setPosts(data.reverse());
-        //   });
       });
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    function success(pos) {
+      var crd = pos.coords;
+      setLocation(crd);
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
   return (

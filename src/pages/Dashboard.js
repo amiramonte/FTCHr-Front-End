@@ -6,18 +6,20 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 // import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
-import AddPost from "../components/AddPost";
-import NewPostForm from "../components/NewPostForm";
+import AddPost from '../components/AddPost'
+import NewPostForm from '../components/NewPostForm';
+import prefixURL from "../../utils/helper";
 
-export default function Dashboard() {
+export default function Dashboard({ user }) {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
   //renders image from Cloudinary
   const [photo, setPhoto] = useState("");
+  const [location, setLocation] = useState([]);
   //front end fetch request to collect all of the posts
 
   const getAllPost = () => {
-    fetch("http://localhost:3001/api/post/getallposts")
+    fetch(`${prefixURL}/api/post/getallposts`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "post data");
@@ -27,37 +29,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     getAllPost();
-  }, []);
-  const [user, setUser] = useState({
-    user_id: 0,
-    user_name: "",
-  });
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    fetch("http://localhost:3001/api/user/verifieduser", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${savedToken}`,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        // console.log(res);
-
-        if (data.id) {
-          console.log(data, "data from the verified route");
-          setToken(savedToken);
-          setUser({
-            user_id: data.id,
-            user_name: data.user_name,
-          });
-        }
-      });
   }, []);
 
   console.log(posts, "public posts");
@@ -73,20 +44,22 @@ export default function Dashboard() {
               posts={posts}
               getAllPost={getAllPost}
               photo={photo}
+              setLocation={setLocation}
             />
             <CloudinaryUploadWidget setPhoto={setPhoto} />
-            {/* <AddPost setPosts={setPosts} />
-            <PostModal setPosts={setPosts} /> */}
             <div className="postContent">
               {posts.map((post) => (
                 <Postcard
                   key={post.id}
+                  post={post}
+                  user={user}
                   photo={post.post_photo}
                   username={post.User?.user_name}
                   UserId={post.UserId}
                   title={post.post_title}
                   content={post.post_content}
                   comments={post.Comments.map((Comment) => Comment)}
+                  getAllPost={getAllPost}
                 />
               ))}
             </div>
