@@ -23,6 +23,10 @@ export default function FormPropsTextFields({
     setToken(savedToken);
   }, []);
 
+  useEffect(() => {
+    setFormState({ ...formState, post_photo: photo });
+  }, [photo]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
