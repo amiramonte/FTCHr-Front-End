@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import prefixURL from "../utils/helper";
+import Logo from "../assets/logowithphrasetrimmed.png";
 
 function Copyright(props) {
   return (
@@ -101,9 +102,11 @@ function SignUp({ setLoggedIn, setToken }) {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+          <img
+            src={Logo}
+            alt="A dog and a cat in a circle"
+            max-width= "19vw">
+          </img>
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
@@ -114,14 +117,14 @@ function SignUp({ setLoggedIn, setToken }) {
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <TextField
-                    autoComplete="given-name"
-                    name="firstName"
+                    autoComplete="Username"
+                    name="Username"
                     required
                     fullWidth
-                    id="firstName"
-                    label="First Name"
+                    id="Username"
+                    label="Username"
                     autoFocus
                     value={formState.user_firstName}
                     onChange={(e) =>

@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRef, useState } from "react";
 import prefixURL from "../utils/helper";
+import Logo from "../assets/logowithphrasetrimmed.png";
 
 function Copyright(props) {
   return (
@@ -101,9 +102,11 @@ function Login({ setLoggedIn }) {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+          <img
+            src={Logo}
+            alt="A dog and a cat in a circle"
+            max-width= "19vw">
+          </img>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>

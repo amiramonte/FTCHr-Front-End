@@ -184,6 +184,7 @@ export default function Messenger({ user }) {
             )}
           />
           <Button
+            class="commentButton"
             variant="contained"
             style={{ margin: "5px 0px" }}
             onClick={createConversation}

@@ -1,14 +1,15 @@
 import React from 'react'
-import erwin from '../images/erwin.jpg'
+import Logo from '../assets/logowithphrase.png'
 
 export default function Home() {
   return (
-    <div>
-        
-        Shinzou wo Sasageyo!
-        <img src={erwin}/>
-        <a href="/signup">Join the Scouts</a>
-        <a href="/login">Die a Scout</a>
+    <div className='homeStyle' >
+        <img src={Logo}
+        alt="A dog and a cat in a circle"/>
+        <p>
+        <a href="/signup">Sign up</a>   
+        <a href="/login"> or Login</a>
+        to join the fun!</p>
     </div>
   )
 }
