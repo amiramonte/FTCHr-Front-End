@@ -18,6 +18,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import prefixURL from "../../utils/helper";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -56,7 +58,7 @@ export default function Postcard(props) {
     setValue({ comment_body: event.target.value });
     setValue({ ...value, UserId: props.user.user_id, PostId: props.post.id });
     console.log(value, "supposed new comment we are going to use");
-    await fetch("http://localhost:3001/api/comment/addcomment", {
+    await fetch(`${prefixURL}/api/comment/addcomment`, {
       method: "POST",
       body: JSON.stringify(value),
       headers: {
@@ -67,7 +69,7 @@ export default function Postcard(props) {
       .then((data) => {
         // make a get route that gets all the comments for that post and set comments to be that then
         fetch(
-          `http://localhost:3001/api/comment/getpostcomments/${data.PostId}`,
+          `${prefixURL}/api/comment/getpostcomments/${data.PostId}`,
           {
             method: "GET",
             headers: {
