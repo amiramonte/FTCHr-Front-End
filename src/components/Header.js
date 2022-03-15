@@ -1,12 +1,14 @@
 import React from "react";
 import "../styles/style.css";
 import Navbar from "./Navbar";
+import Navlogo from "../assets/navlogo.png";
 
 function Header({setLoggedIn}) {
   return (
     <section class="">
-        <div><h1>FTCHr</h1>
-          <div >
+        <div>
+          <img src={Navlogo}></img>
+          <div>
             <Navbar setLoggedIn={setLoggedIn}/>
           </div>
         </div>

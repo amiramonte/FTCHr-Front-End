@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,11 +8,11 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useState} from 'react'
+import {useState} from 'react';
+import Logo from "../assets/logowithphrasetrimmed.png";
 
 function Copyright(props) {
   return (
@@ -32,8 +31,7 @@ const theme = createTheme();
 
 function SignUp({setLoggedIn, setToken}) {
   const [formState, setFormState] = useState({
-    user_firstName: '',
-    user_lastName: '',
+    user_name: '',
     user_email:'',
     user_password:''
   })
@@ -91,37 +89,27 @@ function SignUp({setLoggedIn, setToken}) {
               alignItems: 'center',
             }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img
+            src={Logo}
+            alt="A dog and a cat in a circle"
+            max-width= "19vw">
+          </img>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoComplete="Username"
+                  name="Username"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="Username"
+                  label="Username"
                   autoFocus
-                  value={formState.user_firstName}
-                onChange={e=>setFormState({...formState,user_firstName:e.target.value})}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  value={formState.user_lastName}
-                onChange={e=>setFormState({...formState,user_lastName:e.target.value})}
+                  value={formState.user_name}
+                onChange={e=>setFormState({...formState,user_name:e.target.value})}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -160,7 +148,7 @@ function SignUp({setLoggedIn, setToken}) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
