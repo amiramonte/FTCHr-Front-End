@@ -30,9 +30,11 @@ export default function Dashboard({ user }) {
   useEffect(() => {
     getAllPost();
   }, []);
-
   console.log(posts, "public posts");
   console.log(user, "loggedin user");
+  
+
+
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
@@ -60,6 +62,7 @@ export default function Dashboard({ user }) {
                   content={post.post_content}
                   comments={post.Comments.map((Comment) => Comment)}
                   getAllPost={getAllPost}
+                  setPosts = {setPosts}
                 />
               ))}
             </div>

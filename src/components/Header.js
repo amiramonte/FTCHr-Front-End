@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 function Header({setLoggedIn}) {
   return (
-    <section class="">
+    <section >
         <div><h1>FTCHr</h1>
           <div >
             <Navbar setLoggedIn={setLoggedIn}/>

@@ -13,7 +13,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRef, useState } from "react";
+<<<<<<< HEAD
+import prefixURL from '../utils/helper';
+=======
 import prefixURL from "../utils/helper";
+>>>>>>> dev
 
 function Copyright(props) {
   return (
