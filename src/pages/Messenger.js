@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import prefixURL from "../../utils/helper";
 
 export default function Messenger({ user }) {
   const [token, setToken] = useState("");
@@ -48,7 +49,7 @@ export default function Messenger({ user }) {
       try {
         // request gets all users
         const response = await axios.get(
-          "http://localhost:3001/api/user/getallusers"
+          `${prefixURL}/api/user/getallusers`
         );
         const userArr = response.data.map((userobj) => userobj.user_name);
         console.log(userArr, "user array ");
@@ -83,7 +84,7 @@ export default function Messenger({ user }) {
     const getConversations = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/conversations/" + user.user_name
+          `${prefixURL}/api/conversations/` + user.user_name
         );
         setConversations(response.data);
       } catch (err) {
@@ -97,7 +98,7 @@ export default function Messenger({ user }) {
     const getMessages = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/messages/" + currentChat?.id
+          `${prefixURL}/api/messages/` + currentChat?.id
         );
         setMessages(response.data);
       } catch (err) {
@@ -126,7 +127,7 @@ export default function Messenger({ user }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/messages",
+        `${prefixURL}/api/messages`,
         message
       );
       setMessages([...messages, response.data]);
@@ -152,7 +153,7 @@ export default function Messenger({ user }) {
       console.log(convo, "conversation");
       // just need to add to conversation and re render the page?
       const response = await axios.post(
-        "http://localhost:3001/api/conversations",
+        `${prefixURL}/api/conversations`,
         convo
       );
       console.log(response.data.recieverId, "conversation created");

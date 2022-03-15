@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 // import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
-import AddPost from "../components/AddPost";
-import NewPostForm from "../components/NewPostForm";
+import AddPost from '../components/AddPost'
+import NewPostForm from '../components/NewPostForm';
+import prefixURL from "../../utils/helper";
 
 export default function Dashboard({ user }) {
   //Creating a use state for posts
@@ -18,7 +19,7 @@ export default function Dashboard({ user }) {
   //front end fetch request to collect all of the posts
 
   const getAllPost = () => {
-    fetch("http://localhost:3001/api/post/getallposts")
+    fetch(`${prefixURL}/api/post/getallposts`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "post data");

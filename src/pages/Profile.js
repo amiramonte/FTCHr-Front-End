@@ -3,6 +3,7 @@ import UserInfo from "../components/UserInfo";
 import PetSection from "../components/PetsSection";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
+import prefixURL from "../../utils/helper";
 
 function Profile() {
   const [pets, setPets] = useState([]);
@@ -14,7 +15,7 @@ function Profile() {
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
-    fetch("http://localhost:3001/api/user/verifieduser", {
+    fetch(`${prefixURL}/api/user/verifieduser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
