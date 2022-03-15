@@ -8,7 +8,6 @@ import io from "socket.io-client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
-// import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 export default function Messenger({ user }) {
   const [token, setToken] = useState("");
@@ -142,19 +141,6 @@ export default function Messenger({ user }) {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => {
-    console.log(allUsers, "all users in useEffect");
-    console.log(conversations, "conversations in useEffect")
-    setAllUsers(allUsers.filter((user) => {
-      for(let i =0; i< conversations.length; i++ ) {
-        if(conversations[i].recieverId === user) {
-          return false;
-        }
-      }
-      return true;
-    }))
-  },[conversations])
-
   // function to create a new conversation
   const createConversation = async () => {
     const convo = {
@@ -218,7 +204,6 @@ export default function Messenger({ user }) {
                   conversation={convo}
                   currentUser={user}
                 />
-                <p>Hello</p>
               </div>
             );
           })}
