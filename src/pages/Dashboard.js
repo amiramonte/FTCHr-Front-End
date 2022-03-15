@@ -16,6 +16,7 @@ export default function Dashboard({ user }) {
   //renders image from Cloudinary
   const [photo, setPhoto] = useState("");
   const [location, setLocation] = useState([]);
+  const [currentPost, setCurrentPost] = useState(null);
   //front end fetch request to collect all of the posts
 
   const getAllPost = () => {
@@ -30,12 +31,11 @@ export default function Dashboard({ user }) {
   useEffect(() => {
     getAllPost();
   }, []);
-  console.log(posts, "public posts");
-  console.log(user, "loggedin user");
   
-
-
-  //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
+  function handlePostClick(post){
+    console.log("Hiiii")
+    setCurrentPost(post)
+  }
   return (
     <>
       {user ? (
@@ -65,12 +65,13 @@ export default function Dashboard({ user }) {
                   comments={post.Comments.map((Comment) => Comment)}
                   getAllPost={getAllPost}
                   setPosts = {setPosts}
+                  clickHandler={() => handlePostClick(post)}
                 />
               ))}
             </div>
           </div>
           <div>
-            <Map posts={posts} />
+            <Map posts={posts} currentPost={currentPost}/>
           </div>
         </div>
       ) : (
