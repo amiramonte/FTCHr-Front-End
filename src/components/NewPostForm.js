@@ -6,20 +6,30 @@ import { useState, useEffect } from "react";
 import CloudinaryUploadWidget from "./Cloudinary/UploadWidget.js";
 import prefixURL from "../../utils/helper";
 
-export default function FormPropsTextFields({ setPosts, posts, getAllPost }) {
+export default function FormPropsTextFields({
+  setPosts,
+  posts,
+  getAllPost,
+  photo,
+}) {
   const [token, setToken] = useState("");
   const [formState, setFormState] = useState({
     post_title: "",
     post_content: "",
+    post_photo: photo,
   });
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     setToken(savedToken);
   }, []);
-  
+
+  useEffect(() => {
+    setFormState({ ...formState, post_photo: photo });
+  }, [photo]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
     const createPost = (e) => {
       e.preventDefault();
@@ -34,7 +44,7 @@ export default function FormPropsTextFields({ setPosts, posts, getAllPost }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "created post data");
-        getAllPost()
+        getAllPost();
         // setPosts(prevTodos => [...prevTodos, data]);
         // fetch("http://localhost:3001/api/post/getallposts")
         //   .then((res) => res.json())
@@ -43,8 +53,8 @@ export default function FormPropsTextFields({ setPosts, posts, getAllPost }) {
         //     setPosts(data.reverse());
         //   });
       });
-    };  
-  
+  };
+
   return (
     <Box
       component="form"
