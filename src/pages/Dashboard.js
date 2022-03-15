@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 // import PostModal from "../components/PostModal";
 import CloudinaryUploadWidget from "../components/Cloudinary/UploadWidget";
-import AddPost from '../components/AddPost'
-import NewPostForm from '../components/NewPostForm';
+import AddPost from "../components/AddPost";
+import NewPostForm from "../components/NewPostForm";
 
 export default function Dashboard() {
   //Creating a use state for posts
   const [posts, setPosts] = useState([]);
+  //renders image from Cloudinary
+  const [photo, setPhoto] = useState("");
   //front end fetch request to collect all of the posts
 
   const getAllPost = () => {
@@ -21,10 +23,10 @@ export default function Dashboard() {
         console.log(data, "post data");
         setPosts(data);
       });
-  }
+  };
 
   useEffect(() => {
-    getAllPost()
+    getAllPost();
   }, []);
   const [user, setUser] = useState({
     user_id: 0,
@@ -58,22 +60,28 @@ export default function Dashboard() {
       });
   }, []);
 
-  console.log(posts, "publicc posts");
-  console.log(user, "loggedin user")
+  console.log(posts, "public posts");
+  console.log(user, "loggedin user");
   //passing in all the 'prop' values that we are using in the postcard.js file.returns a new postcard
   return (
     <>
       {user ? (
         <div className="dashboard-flex flex-row">
           <div className="postcards">
-            <NewPostForm setPosts={setPosts} posts={posts} getAllPost={getAllPost} />
-            <CloudinaryUploadWidget />
+            <NewPostForm
+              setPosts={setPosts}
+              posts={posts}
+              getAllPost={getAllPost}
+              photo={photo}
+            />
+            <CloudinaryUploadWidget setPhoto={setPhoto} />
             {/* <AddPost setPosts={setPosts} />
             <PostModal setPosts={setPosts} /> */}
             <div className="postContent">
               {posts.map((post) => (
                 <Postcard
                   key={post.id}
+                  photo={post.post_photo}
                   username={post.User?.user_name}
                   UserId={post.UserId}
                   title={post.post_title}

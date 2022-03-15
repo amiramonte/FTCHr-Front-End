@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import CloudinaryUploadWidget from "cloudinary-react";
-
+import setPhoto from "../../pages/Dashboard";
 // Where do we want the upload to occur? The button has an 'click' event listener to upload the photo to the cloudinary server.
 
 class CloudinaryUploadWidget extends Component {
@@ -16,7 +16,8 @@ class CloudinaryUploadWidget extends Component {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info);
+          console.log("Done! Here is the image URL: ", result.info.url);
+          setPhoto(result.info.url);
         }
       }
     );
