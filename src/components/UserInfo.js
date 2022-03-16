@@ -11,7 +11,11 @@ function UserInfo(props) {
   return (
     <div className="flex-row justifycontent-center">
       <div className="user-photo">
-        <Avatar alt="User Upload" src="" sx={{ width: 50, height: 50 }} />
+        <Avatar
+          alt="User Upload"
+          src={props.photo}
+          sx={{ width: 50, height: 50 }}
+        />
       </div>
 
       <div className="about-section">
@@ -21,16 +25,7 @@ function UserInfo(props) {
             <Typography variant="h5" component="div">
               {props.username}
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Just me and my dogs!
-            </Typography>
-            <Typography variant="body2">
-              Gus is an American Pitbull Terrier and Douglas is a goofy lab mix
-            </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small">Add Friend</Button>
-          </CardActions>
         </Card>
       </div>
     </div>

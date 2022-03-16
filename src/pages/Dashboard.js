@@ -31,10 +31,10 @@ export default function Dashboard({ user }) {
   useEffect(() => {
     getAllPost();
   }, []);
-  
-  function handlePostClick(post){
-    console.log("Hiiii")
-    setCurrentPost(post)
+
+  function handlePostClick(post) {
+    console.log("Hiiii");
+    setCurrentPost(post);
   }
   return (
     <>
@@ -64,14 +64,14 @@ export default function Dashboard({ user }) {
                   content={post.post_content}
                   comments={post.Comments.map((Comment) => Comment)}
                   getAllPost={getAllPost}
-                  setPosts = {setPosts}
+                  setPosts={setPosts}
                   clickHandler={() => handlePostClick(post)}
                 />
               ))}
             </div>
           </div>
           <div>
-            <Map posts={posts} currentPost={currentPost}/>
+            <Map posts={posts} currentPost={currentPost} />
           </div>
         </div>
       ) : (
