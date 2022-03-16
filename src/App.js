@@ -21,7 +21,7 @@ function App() {
     user_name: "",
   });
   // grab user data from token
-  const getToken = function () {
+  useEffect(()=> {
     const savedToken = localStorage.getItem("token");
     fetch(`${prefixURL}/api/user/verifieduser`, {
       method: "GET",
@@ -30,24 +30,21 @@ function App() {
         authorization: `Bearer ${savedToken}`,
       },
     })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.id) {
-          console.log(data, "data from the verified route");
-          setToken(savedToken);
-          setUser({
-            user_id: data.id,
-            user_name: data.user_name,
-          });
-        }
-      });
-  };
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      if (data.id) {
+        console.log(data, "data from the verified route");
+        setToken(savedToken);
+        setUser({
+          user_id: data.id,
+          user_name: data.user_name,
+        });
+      }
+    });
+  }, []);
 
-if (loggedIn) {
-  getToken();
-}
 
   // if (!token)  {
   //   return <Login setLoggedIn={setLoggedIn} />
@@ -56,7 +53,7 @@ if (loggedIn) {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* {token !== "" && <Header setLoggedIn={setLoggedIn} />}
+        {token !== "" && <Header setLoggedIn={setLoggedIn} />}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -73,8 +70,8 @@ if (loggedIn) {
           element={
             <Home />
           }
-        />} */}
-        <Header setLoggedIn={setLoggedIn} />
+        />}
+        {/* <Header setLoggedIn={setLoggedIn} />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -85,7 +82,7 @@ if (loggedIn) {
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route path="/messenger" element={<Messenger user={user} />} />
           <Route path="/dashboard" element={<Dashboard user={user} />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
