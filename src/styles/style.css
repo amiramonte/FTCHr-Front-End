@@ -42,10 +42,14 @@
   justify-content: center;
 }
 
+.bebo {
+  padding: 9px;
+  justify-content: center;
+}
+
+
 .postcards {
   width: 30vw;
-  
-  
 }
 
 .postContent {
