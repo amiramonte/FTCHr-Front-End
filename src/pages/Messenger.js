@@ -29,6 +29,7 @@ export default function Messenger({ user }) {
 
   // connect to the socket server
   useEffect(() => {
+    // put deployed socket io heroku page here
     socket.current = io("ws://localhost:8900");
     socket.current.on(
       "getMessage",
