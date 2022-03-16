@@ -11,6 +11,7 @@ function Profile() {
   const [user, setUser] = useState({
     user_id: 0,
     user_name: "",
+    user_photo: "",
   });
   const [token, setToken] = useState("");
 
@@ -37,6 +38,7 @@ function Profile() {
           setUser({
             user_id: data.id,
             user_name: data.user_name,
+            user_photo: data.user_photo,
           });
         }
       });
@@ -45,10 +47,10 @@ function Profile() {
   return (
     <div className="">
       <div className="user-info">
-        <UserInfo username={user.user_name} />
-        <NewPetForm setPets={setPets} />
+        <UserInfo username={user.user_name} photo={user.user_photo} />
       </div>
       <div className="flex-row justifycontent-center">
+        <NewPetForm setPets={setPets} />
         {pets.map((pets) => (
           <PetSection
             key={pets.id}

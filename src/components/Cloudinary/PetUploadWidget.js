@@ -7,8 +7,6 @@ class CloudinaryUploadWidget extends Component {
         cloudName: "ftchr",
         uploadPreset: "ftchrnovowelsbaby",
         sources: ["url", "camera", "local"],
-        cropping: true,
-        croppingAspectRatio: 1,
         showSkipCropButton: false,
         multiple: false,
         defaultSource: "local",

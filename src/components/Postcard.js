@@ -92,18 +92,13 @@ export default function Postcard(props) {
     <div onClick={props.clickHandler}>
       <Card sx={{ maxWidth: 450 }}>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
-            </Avatar>
-          }
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
           title={props.title}
-          subheader={props.username}
+          subheader={`by: ${props.username}`}
         />
         <CardMedia
           component="img"
