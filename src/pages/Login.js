@@ -78,7 +78,7 @@ function Login({ setLoggedIn }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(https://res.cloudinary.com/ftchr/image/upload/v1647411962/ftchr/dog_ynmscd.png)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
