@@ -4,12 +4,14 @@ import PetSection from "../components/PetsSection";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
 import prefixURL from "../utils/helper";
+import NewPetForm from "../components/NewPetForm";
 
 function Profile() {
   const [pets, setPets] = useState([]);
   const [user, setUser] = useState({
     user_id: 0,
     user_name: "",
+    user_photo: "",
   });
   const [token, setToken] = useState("");
 
@@ -36,6 +38,7 @@ function Profile() {
           setUser({
             user_id: data.id,
             user_name: data.user_name,
+            user_photo: data.user_photo,
           });
         }
       });
@@ -44,12 +47,14 @@ function Profile() {
   return (
     <div className="">
       <div className="user-info">
-        <UserInfo username={user.user_name} />
+        <UserInfo username={user.user_name} photo={user.user_photo} />
       </div>
       <div className="flex-row justifycontent-center">
+        <NewPetForm setPets={setPets} />
         {pets.map((pets) => (
           <PetSection
             key={pets.id}
+            photo={pets.pet_photo}
             petname={pets.pet_name}
             petspecies={pets.pet_species}
             petage={pets.pet_age}

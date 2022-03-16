@@ -14,7 +14,7 @@ class CloudinaryUploadWidget extends Component {
       (error, result) => {
         if (!error && result && result.event === "success") {
           console.log("Done! Here is the image URL: ", result.info.url);
-          this.props.setPhoto(result.info.url);
+          this.props.setpetPhoto(result.info.url);
         }
       }
     );

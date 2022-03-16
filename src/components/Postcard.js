@@ -40,12 +40,11 @@ export default function Postcard(props) {
     // setComments(props.comments);
     const savedToken = localStorage.getItem("token");
     setToken(savedToken);
-    
   }, []);
 
-  React.useEffect(()=>{
-    setValue({ ...value, UserId: props.user.user_id});
-  },[props.user])
+  React.useEffect(() => {
+    setValue({ ...value, UserId: props.user.user_id });
+  }, [props.user]);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -56,7 +55,7 @@ export default function Postcard(props) {
     PostId: props.post.id,
   });
 
- console.log("");
+  console.log("");
   const handleChange = async (event) => {
     setValue({ comment_body: event.target.value });
     setValue({ ...value, UserId: props.user.user_id, PostId: props.post.id });
@@ -93,18 +92,13 @@ export default function Postcard(props) {
     <div onClick={props.clickHandler}>
       <Card sx={{ maxWidth: 450 }}>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
-            </Avatar>
-          }
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
           title={props.title}
-          subheader={props.username}
+          subheader={`by: ${props.username}`}
         />
         <CardMedia
           component="img"
@@ -163,7 +157,7 @@ export default function Postcard(props) {
             </Box>
             <Typography paragraph>Comments:</Typography>
             {comments.map((comment) => (
-              <Typography  key = {comment.id}>
+              <Typography key={comment.id}>
                 <a href="#">{comment.User.user_name}</a>
                 <span>: {comment.comment_body}</span>
               </Typography>
