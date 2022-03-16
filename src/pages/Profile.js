@@ -50,7 +50,7 @@ function Profile() {
       <div className="user-info">
         <UserInfo username={user.user_name} photo={user.user_photo} />
       </div>
-      <div className="flex-row justifycontent-center">
+      <div className="flex-row bebo">
         <NewPetForm setPets={setPets} />
         {pets.map((pets) => (
           <PetSection

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Messenger from "./pages/Messenger.js";
 import Home from "./pages/Home";
@@ -23,7 +22,6 @@ function App() {
     user_name: "",
   });
   // grab user data from token
-  useEffect(() => {
     const savedToken = localStorage.getItem("token");
     fetch(`${prefixURL}/api/user/verifieduser`, {
       method: "GET",
@@ -45,7 +43,6 @@ function App() {
           });
         }
       });
-  }, []);
 
   if (!token)  {
     return <Login setLoggedIn={setLoggedIn} />
