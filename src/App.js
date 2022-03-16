@@ -3,6 +3,7 @@ import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Messenger from "./pages/Messenger.js";
 import Home from "./pages/Home";
+import About from "./pages/About";
 
 // import  user useCOntext onto this page then wrap all the components with the provider
 // in the context api, grab username from token
@@ -46,12 +47,17 @@ function App() {
       });
   }, []);
 
+  if (!token)  {
+    return <Login setLoggedIn={setLoggedIn} />
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         {token !== "" && <Header setLoggedIn={setLoggedIn} />}
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken} />}/>
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
           {token !== "" ?
@@ -67,7 +73,6 @@ function App() {
           }
         />}
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

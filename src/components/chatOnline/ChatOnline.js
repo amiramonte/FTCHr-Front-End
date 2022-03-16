@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './chatOnline.css'
-import image from '../../images/naruto.jpg';
+import image from  "../../assets/tinylogo.png";
 import axios from 'axios';
 
 export default function ChatOnline({onlineUsers, currentId, setCurrentChat}) {
@@ -21,7 +21,7 @@ export default function ChatOnline({onlineUsers, currentId, setCurrentChat}) {
                 <img className="chatOnlineImg" src={image} alt="naruto"/>
                 <div className='chatOnlineBadge'></div>
             </div>
-            <span className='chatOnlineName'>naruto</span>
+            <span className='chatOnlineName'>FTCHr Team</span>
         </div>
     </div>
   )

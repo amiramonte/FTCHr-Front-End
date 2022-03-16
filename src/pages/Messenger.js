@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import prefixURL from "../utils/helper";
+import Footer from "../components/Footer";
 
 export default function Messenger({ user }) {
   const [token, setToken] = useState("");
@@ -256,6 +257,7 @@ export default function Messenger({ user }) {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

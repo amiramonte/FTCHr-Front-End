@@ -22,3 +22,14 @@
 .conversationName {
     font-weight: 500; 
 }
+
+.chatSubmitButton {
+    background-color: #219EBC;
+    color: #ffffff;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 24px;
+    border: 2px outset dimgray;
+    padding: 5px; 
+}

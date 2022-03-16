@@ -1,5 +1,5 @@
 import React from 'react'
-import image from '../../images/naruto.jpg';
+import image from "../../assets/tinylogo.png";
 import './message.css'
 import moment from 'moment';
 

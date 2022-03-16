@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./conversation.css";
-import image from "../../images/naruto.jpg";
+import image from "../../assets/tinylogo.png";
 import axios from "axios";
 import prefixURL from "../../utils/helper";
 
