@@ -39,20 +39,14 @@ const theme = createTheme();
 
 function SignUp({ setLoggedIn, setToken }) {
   const [formState, setFormState] = useState({
-    user_firstName: "",
-    user_lastName: "",
+    user_name: "",
     user_email: "",
     user_password: "",
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(formState, "signup form data")
 
     fetch(`${prefixURL}/api/user/sign-up`, {
       method: "POST",
@@ -113,7 +107,6 @@ function SignUp({ setLoggedIn, setToken }) {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
@@ -126,11 +119,11 @@ function SignUp({ setLoggedIn, setToken }) {
                     id="Username"
                     label="Username"
                     autoFocus
-                    value={formState.user_firstName}
+                    value={formState.user_name}
                     onChange={(e) =>
                       setFormState({
                         ...formState,
-                        user_firstName: e.target.value,
+                        user_name: e.target.value,
                       })
                     }
                   />
@@ -169,7 +162,7 @@ function SignUp({ setLoggedIn, setToken }) {
                 </Grid>
               </Grid>
               <Button
-                type="submit"
+                onClick={handleSubmit}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -178,7 +171,7 @@ function SignUp({ setLoggedIn, setToken }) {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/login" variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>
