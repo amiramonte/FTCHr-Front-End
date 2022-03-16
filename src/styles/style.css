@@ -113,3 +113,8 @@ padding: 3px 3px; }
   background-color: #FFBF69;
   color: black;
 }
+
+.Navbar {
+  display: flex;
+  justify-content: flex-end;
+}

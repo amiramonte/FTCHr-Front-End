@@ -5,6 +5,7 @@ import "../styles/style.css";
 import { useEffect, useState } from "react";
 import prefixURL from "../utils/helper";
 import NewPetForm from "../components/NewPetForm";
+import Footer from "../components/Footer";
 
 function Profile() {
   const [pets, setPets] = useState([]);
@@ -64,6 +65,7 @@ function Profile() {
           />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
