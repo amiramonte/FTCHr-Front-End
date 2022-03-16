@@ -21,27 +21,33 @@ function App() {
     user_name: "",
   });
   // grab user data from token
-    // const savedToken = localStorage.getItem("token");
-    // fetch(`${prefixURL}/api/user/verifieduser`, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     authorization: `Bearer ${savedToken}`,
-    //   },
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.id) {
-    //       console.log(data, "data from the verified route");
-    //       setToken(savedToken);
-    //       setUser({
-    //         user_id: data.id,
-    //         user_name: data.user_name,
-    //       });
-    //     }
-    //   });
+  const getToken = function () {
+    const savedToken = localStorage.getItem("token");
+    fetch(`${prefixURL}/api/user/verifieduser`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${savedToken}`,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.id) {
+          console.log(data, "data from the verified route");
+          setToken(savedToken);
+          setUser({
+            user_id: data.id,
+            user_name: data.user_name,
+          });
+        }
+      });
+  };
+
+if (loggedIn) {
+  getToken();
+}
 
   // if (!token)  {
   //   return <Login setLoggedIn={setLoggedIn} />
@@ -69,15 +75,17 @@ function App() {
           }
         />} */}
         <Header setLoggedIn={setLoggedIn} />
-          <Routes>
+        <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken} />}/>
+          <Route
+            path="/signup"
+            element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken} />}
+          />
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route path="/messenger" element={<Messenger user={user} />} />
           <Route path="/dashboard" element={<Dashboard user={user} />} />
           <Route path="/profile" element={<Profile />} />
-
         </Routes>
       </BrowserRouter>
     </div>
