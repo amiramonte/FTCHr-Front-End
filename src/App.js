@@ -49,17 +49,23 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {<Header setLoggedIn={setLoggedIn} />}
+        {token !== "" && <Header setLoggedIn={setLoggedIn} />}
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/messenger" element={<Messenger user={user} />} />
-          <Route
-            path="/signup"
-            element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken} />}
-          />
-          <Route path="/dashboard" element={<Dashboard user={user} />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setToken={setToken} />}/>
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
+          {token !== "" ?
+          <>
+            <Route path="/messenger" element={<Messenger user={user} />} />
+            <Route path="/dashboard" element={<Dashboard user={user} />} />
+            <Route path="/profile" element={<Profile />} />
+          </> 
+          : <Route
+          path="*"
+          element={
+            <Home />
+          }
+        />}
         </Routes>
         <Footer />
       </BrowserRouter>
