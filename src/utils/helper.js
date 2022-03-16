@@ -1,4 +1,4 @@
-let deployed = false;
+let deployed = true;
 
 let prefixURL = deployed
   ? "https://ftchrbackend.herokuapp.com"
