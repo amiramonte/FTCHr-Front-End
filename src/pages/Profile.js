@@ -46,11 +46,13 @@ function Profile() {
     <div className="">
       <div className="user-info">
         <UserInfo username={user.user_name} />
+        <NewPetForm setPets={setPets} />
       </div>
       <div className="flex-row justifycontent-center">
         {pets.map((pets) => (
           <PetSection
             key={pets.id}
+            photo={pets.pet_photo}
             petname={pets.pet_name}
             petspecies={pets.pet_species}
             petage={pets.pet_age}

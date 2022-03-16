@@ -18,26 +18,26 @@ function PetSection(props) {
         min-height="140"
         min-width="100"
         alt="my pet"
-        src={props.petPhoto}
+        src={props.photo}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.petname}
+          <span>Name: {props.petname}</span>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.petspecies}
+          <span>Species: {props.petspecies}</span>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <span>{props.petage} years old</span>
+          <span>Age: {props.petage} years old</span>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <span>{props.petsize} lbs</span>
+          <span>Weight: {props.petsize} lbs</span>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.petbreed}
+          <span>Breed: {props.petbreed}</span>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.petpersonality}
+          <span>Personality: {props.petpersonality}</span>
         </Typography>
       </CardContent>
     </Card>
