@@ -4,6 +4,7 @@ import PetSection from "../components/PetsSection";
 import "../styles/style.css";
 import { useEffect, useState } from "react";
 import prefixURL from "../utils/helper";
+import NewPetForm from "../components/NewPetForm";
 
 function Profile() {
   const [pets, setPets] = useState([]);

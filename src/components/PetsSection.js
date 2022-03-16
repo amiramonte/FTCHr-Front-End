@@ -18,7 +18,7 @@ function PetSection(props) {
         min-height="140"
         min-width="100"
         alt="my pet"
-        src="https://res.cloudinary.com/ftchr/image/upload/v1646778525/ftchr/fgekdcgxgagckukjjngn.jpg"
+        src={props.petPhoto}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
