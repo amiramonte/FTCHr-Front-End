@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.footer-text {
+  font-size: small;
+  text-align: center;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+#map {
+  width: 78vw;
+  height: 50vh;
+}
+
+/*  m765px*/
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.justifycontent-center {
+  justify-content: center;
+}
+
+.postcards {
+  width: 30vw;
+  
+  
+}
+
+.postContent {
+  max-height: 77vh;
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 765px) {
+
+  .postcards {
+    width: 100vw;
+  }
+
+  #map {
+    display: none;
+  }
+  
+}
+
+.homeStyle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9px; }
+
+.addPostStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; 
+  align-items: stretch;
+  padding: 9px; }
+
+.cloudinary-button{
+  background-color: #ff9f1c;
+  color: #ffffff;
+  padding: 3px 3px; }
+
+.cloudinary-button:hover{
+  background-color: #FFBF69;
+  color: black; }
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: #126782;
+  background-image: linear-gradient(to right,#126782, #219EBC); }
+
+.css-1q39md6-MuiButtonBase-root-MuiButton-root:hover {
+  color: #FF9F1C; }
+
+.commentButton {
+  color: #ffffff;
+  background-color: #FF9F1C;
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 24px;
+  border: 2px outset dimgray;
+  padding: 5px; }
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+background-color: #ff9f1c;
+color: #ffffff;
+padding: 3px 3px; }
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: #FFBF69;
+  color: black;
+}
+
+.Navbar {
+  display: flex;
+  justify-content: flex-end;
+}

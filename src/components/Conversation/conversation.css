@@ -1,0 +1,35 @@
+.conversation {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.conversation:hover {
+    background-color: rgb(226, 225, 225);
+    
+}
+
+.conversationImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px
+}
+
+.conversationName {
+    font-weight: 500; 
+}
+
+.chatSubmitButton {
+    background-color: #219EBC;
+    color: #ffffff;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 24px;
+    border: 2px outset dimgray;
+    padding: 5px; 
+}
