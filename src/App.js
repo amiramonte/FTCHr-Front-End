@@ -11,7 +11,6 @@ import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Dashboard from "./pages/Dashboard.js";
 import Profile from "./pages/Profile.js";
-import axios from "axios";
 import prefixURL from "./utils/helper";
 
 function App() {
@@ -22,27 +21,27 @@ function App() {
     user_name: "",
   });
   // grab user data from token
-    const savedToken = localStorage.getItem("token");
-    fetch(`${prefixURL}/api/user/verifieduser`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${savedToken}`,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.id) {
-          console.log(data, "data from the verified route");
-          setToken(savedToken);
-          setUser({
-            user_id: data.id,
-            user_name: data.user_name,
-          });
-        }
-      });
+    // const savedToken = localStorage.getItem("token");
+    // fetch(`${prefixURL}/api/user/verifieduser`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     authorization: `Bearer ${savedToken}`,
+    //   },
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.id) {
+    //       console.log(data, "data from the verified route");
+    //       setToken(savedToken);
+    //       setUser({
+    //         user_id: data.id,
+    //         user_name: data.user_name,
+    //       });
+    //     }
+    //   });
 
   if (!token)  {
     return <Login setLoggedIn={setLoggedIn} />
