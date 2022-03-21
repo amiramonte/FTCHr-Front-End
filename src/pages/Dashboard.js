@@ -35,6 +35,7 @@ export default function Dashboard({ user }) {
     console.log("Hiiii");
     setCurrentPost(post);
   }
+
   return (
     <>
       {user ? (
