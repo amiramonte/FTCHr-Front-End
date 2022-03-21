@@ -1,8 +1,12 @@
+// import prefixURL from "./utils/helper";
+
 const io = require("socket.io")(8900, {
     cors: {
         origin: "http://localhost:3000"
     }
 });
+// up
+// heroku fron end website
 
 // how to send to the same user every time
 // this only inlcudes users that are online currently
