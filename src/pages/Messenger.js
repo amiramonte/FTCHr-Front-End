@@ -31,6 +31,12 @@ export default function Messenger({ user }) {
   useEffect(() => {
     // put deployed socket io heroku page here
     socket.current = io("https://ftchr-socket-io.herokuapp.com/");
+
+    // LOCAL
+    // socket.current = io("http://localhost:4000", {
+    //   credentials: true,
+    // });
+
     socket.current.on(
       "getMessage",
       (data) => {
