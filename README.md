@@ -1,73 +1,76 @@
-# FTCHr-Project-3
+# FTCHr - Because Your Pets Need a Social Life Too
 
 ## Description
 
 ![badgeImg](https://shields.io/badge/license-MIT-green)
 
-This project allows pet owners to meet up with other pet owners near them and set up play dates for their pets. Users are able to log into the application and are greeted with a interactive map of post locations. These post locations are created by users who are looking to find other people to meet. The logged in user can create their own post and their current estimated location will render on the map. Users are also able to selected any of the users in the application and create a conversation with the direct messaging feature as well. 
+FTCHr allows pet owners to meet up with others near them to set up play dates for their pets. Users are able to create an account and log into the application. Upon login, users are greeted with an interactive map of post locations in their area. These post locations are created by users who are looking to find other people and pets to meet. The logged in user can create their own posts and their current estimated location will render on the map if location permission is granted. Users are also able to select any of the users in the application and create a live conversation with the direct messaging feature as well.
 
-
-
-## Table of Contents 
+## Table of Contents
 
 [Installation](#Installation)
-    
+
 [Usage](#Usage)
-    
+
 [License](#License)
-    
-[Constributing](#Constributing)
-    
+
+[Technologies](#Technologies)
+
+[Contributing](#Contributing)
+
 [Tests](#Tests)
-    
+
 [Questions](#Questions)
-    
-    
-## Installation (if Local Functionallity Desired)
-    
+
+## Installation (if Local Functionality Desired)
+
 1. Clone the repo from https://github.com/amiramonte/FTCHr-Project-3, https://github.com/amiramonte/FTCHr-server-project-3, and https://github.com/truont2/FTCHr-socket-io
-2. Combine all the files into a single folder 
+2. Combine all the files into a single folder
 3. Setup .env file with mysql login credentials in the Server repo
 4. Open integrated terminal in each repo
 5. Run "npm i" to install dependencies
-6. Run schema file ("db/schema.sql") after connecting to mysql in the server repo 
+6. Run schema file ("db/schema.sql") after connecting to mysql in the server repo
 7. Run "npm run seed" to seed the database
 8. Run "npm start" to boot up the server, front-end, and socket repo.
 9. Connect to "http://localhost:3001" in your browser
-    
-    
+
 ## Usage
-    
-To use, visit https://ftchrapp.herokuapp.com/ 
 
-Screenshots: 
-![homepage](public/assets/screenshots/homepage.PNG)
-![dashboard](public/assets/screenshots/dashboard.PNG)
-![footer](public/assets/screenshots/footer.PNG)
-![oneStop](public/assets/screenshots/oneStop.PNG)
-![weather](public/assets/screenshots/weather.PNG)
+To use, visit https://ftchrapp.herokuapp.com/
 
-GIF:
-![gif](public/assets/screenshots/LoginAndCreateTrip.gif)
-    
-## License 
-    
+![gif](./src/assets/images/functionality.gif)
+
+## License
+
 GitHub
-    
-    
-## Contribution 
-    
-To contribute, contact us!
-    
-    
+
+## Technologies
+
+- [React](https://reactjs.org/)
+- [JavaScript](https://www.javascript.com/)
+- [MUI](https://mui.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [Express](https://www.npmjs.com/package/express)
+- [MySQL](https://www.npmjs.com/package/mysql)
+- [JWT](https://jwt.io/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Cloudinary API](https://cloudinary.com/documentation/react_integration)
+- [React Leaflet](https://react-leaflet.js.org/)
+- [Socket IO](https://socket.io/)
+
+## Contribution
+
+To contribute, contact any of us below!
+
 ## Tests
-    
-Please report any bugs to us :) (We're sure you'll find some)
-    
+
+Please contact any of us if you find bugs to squash! 🐛🐜
+
 ## Questions
-    
-checkout our githubs!
+
+Checkout our Githubs!
+
 - [AndrewTranMSW](https://github.com/AndrewTranMSW)
-- [truont2](github.com/hcweigand10)
+- [truont2](https://github.com/truont2)
 - [Acanthodoris](https://github.com/Acanthodoris)
 - [amiramonte](https://github.com/amiramonte)
