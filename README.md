@@ -24,7 +24,7 @@ FTCHr allows pet owners to meet up with others near them to set up play dates fo
 
 ## Installation (if Local Functionality Desired)
 
-1. Clone the repo from https://github.com/amiramonte/FTCHr-Project-3, https://github.com/amiramonte/FTCHr-server-project-3, and https://github.com/truont2/FTCHr-socket-io
+1. Clone the repo from https://github.com/amiramonte/FTCHr-Front-End, https://github.com/amiramonte/FTCHr-Back-End, and https://github.com/truont2/FTCHr-socket-io
 2. Combine all the files into a single folder
 3. Setup .env file with mysql login credentials in the Server repo
 4. Open integrated terminal in each repo
