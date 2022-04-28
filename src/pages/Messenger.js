@@ -20,6 +20,7 @@ export default function Messenger({ user }) {
   const [arrivalMessage, setArrivalNewMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [alreadyCreatedConvo, setAlreadyCreatedConvo] = useState(false);
 
   // for the autocomplete form to create a new conversation
   const [value, setValue] = React.useState(allUsers[0]);
@@ -147,22 +148,31 @@ export default function Messenger({ user }) {
 
   // function to create a new conversation
   const createConversation = async () => {
-    const convo = {
-      senderId: user.user_name,
-      recieverId: value,
-    };
+    if(value !== undefined){
+      const convo = {
+        senderId: user.user_name,
+        recieverId: value,
+      };
+
+      const isDuplicate = (data, obj) =>
+      data.some((el) =>
+        Object.entries(obj).every(([key, value]) => value === el[key])
+      );
 
     try {
       console.log(convo, "conversation");
       // just need to add to conversation and re render the page?
-      const response = await axios.post(
-        `${prefixURL}/api/conversations`,
-        convo
-      );
-      console.log(response.data.recieverId, "conversation created");
-      setConversations([...conversations, response.data]);
+      if (!isDuplicate(conversations, convo)) {
+        const response = await axios.post(
+          `${prefixURL}/api/conversations`,
+          convo
+        );
+        console.log(response.data.recieverId, "conversation created");
+        setConversations([...conversations, response.data]);
+      }
     } catch (err) {
       console.log(err);
+    }
     }
   };
 
@@ -199,6 +209,7 @@ export default function Messenger({ user }) {
           >
             Create Conversation
           </Button>
+          {alreadyCreatedConvo ? <p>Conversation exists already</p>: ''}
           {conversations.map((convo) => {
             // console.log(convo);
             // need to  pass in user prop later
@@ -248,10 +259,10 @@ export default function Messenger({ user }) {
               </div>
             </>
           ) : (
-            <span className="noConversationText">
+            <p className="noConversationText">
               Hello, {user.user_name}
-              Open a conversation to start a chat.
-            </span>
+              <p>Open a conversation to chat</p>
+            </p>
           )}
         </div>
       </div>
